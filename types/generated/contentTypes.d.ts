@@ -678,6 +678,8 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
       Schema.Attribute.Private;
+    navLabel: Schema.Attribute.String;
+    navOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     pageBuilder: Schema.Attribute.DynamicZone<
       [
         'acf-sections.banner-layout',
@@ -768,6 +770,28 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'acf-sections.image-text-feature-boxes',
         'acf-sections.impact-highlights-section',
         'acf-sections.partner-showcase-block',
+        'acf-sections.qubi-home-hero',
+        'acf-sections.qubi-demo-preview',
+        'acf-sections.qubi-problem-section',
+        'acf-sections.qubi-capabilities-section',
+        'acf-sections.qubi-outcomes-section',
+        'acf-sections.qubi-how-it-works-section',
+        'acf-sections.qubi-use-cases-section',
+        'acf-sections.qubi-integration-section',
+        'acf-sections.qubi-human-in-loop-section',
+        'acf-sections.qubi-analytics-section',
+        'acf-sections.qubi-final-cta-section',
+        'acf-sections.qubi-simple-hero',
+        'acf-sections.qubi-stats-section',
+        'acf-sections.qubi-case-studies-section',
+        'acf-sections.qubi-story-section',
+        'acf-sections.qubi-differentiators-section',
+        'acf-sections.qubi-callout-section',
+        'acf-sections.qubi-plans-section',
+        'acf-sections.qubi-icon-grid-section',
+        'acf-sections.qubi-execution-section',
+        'acf-sections.qubi-comparison-section',
+        'acf-sections.qubi-faq-section',
       ]
     >;
     pageType: Schema.Attribute.Enumeration<
@@ -780,6 +804,8 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
       }> &
       Schema.Attribute.DefaultTo<'landing'>;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    showInNav: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     slug: Schema.Attribute.UID<'title'> &
       Schema.Attribute.SetPluginOptions<{
         'content-manager': {
@@ -826,6 +852,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::post.post'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;

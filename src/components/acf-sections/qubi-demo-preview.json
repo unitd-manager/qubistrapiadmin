@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_acf_sections_qubi_demo_preview",
+  "info": {
+    "displayName": "Qubi Demo Preview"
+  },
+  "attributes": {
+    "section_space_padding": {
+      "type": "component",
+      "repeatable": false,
+      "component": "acf-sections.section-space-padding"
+    },
+    "video_title": {
+      "type": "text"
+    },
+    "video_duration": {
+      "type": "string"
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "video_url": {
+      "type": "text"
+    },
+    "class_name": {
+      "type": "string"
+    },
+    "acf_id": {
+      "type": "string"
+    }
+  }
+}

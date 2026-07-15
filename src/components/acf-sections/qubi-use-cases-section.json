@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_acf_sections_qubi_use_cases_section",
+  "info": {
+    "displayName": "Qubi Use Cases Section"
+  },
+  "attributes": {
+    "section_space_padding": {
+      "type": "component",
+      "repeatable": false,
+      "component": "acf-sections.section-space-padding"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "main_title": {
+      "type": "text"
+    },
+    "use_case_items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "acf-shared.qubi-use-cases-section-use-case-items"
+    },
+    "class_name": {
+      "type": "string"
+    },
+    "acf_id": {
+      "type": "string"
+    }
+  }
+}

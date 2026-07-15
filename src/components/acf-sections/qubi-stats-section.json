@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_acf_sections_qubi_stats_sections",
+  "info": {
+    "displayName": "Qubi Stats Section",
+    "description": "Horizontal bar of big stat numbers with labels"
+  },
+  "attributes": {
+    "section_space_padding": {
+      "type": "component",
+      "repeatable": false,
+      "component": "acf-sections.section-space-padding"
+    },
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "acf-shared.qubi-stat-item"
+    },
+    "class_name": {
+      "type": "string"
+    },
+    "acf_id": {
+      "type": "string"
+    }
+  }
+}

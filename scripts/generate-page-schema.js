@@ -79,6 +79,20 @@ function buildPageSchema() {
         pluginOptions: HIDDEN_PLUGIN_OPTIONS,
       },
 
+      showInNav: {
+        type: 'boolean',
+        default: true,
+      },
+
+      navLabel: {
+        type: 'string',
+      },
+
+      navOrder: {
+        type: 'integer',
+        default: 0,
+      },
+
       ...createSectionAttributes(),
 
       pageBuilder: createDynamicZone(

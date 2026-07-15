@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_acf_shared_qubi_icon_card_items",
+  "info": {
+    "displayName": "Qubi Icon Card Item"
+  },
+  "attributes": {
+    "icon": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

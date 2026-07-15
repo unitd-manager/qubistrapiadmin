@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_acf_shared_qubi_problem_items",
+  "info": {
+    "displayName": "Qubi Problem Section Problem Items"
+  },
+  "attributes": {
+    "icon": {
+      "type": "string"
+    },
+    "title": {
+      "type": "text"
+    }
+  }
+}

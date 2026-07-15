@@ -908,6 +908,16 @@ export interface AcfSectionsHealthcareAutomationTabs
   };
 }
 
+export interface AcfSectionsHero extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_heroes';
+  info: {
+    displayName: 'hero';
+  };
+  attributes: {
+    title: Schema.Attribute.RichText;
+  };
+}
+
 export interface AcfSectionsHiringProcessStepsLayout
   extends Struct.ComponentSchema {
   collectionName: 'components_acf_sections_hiring_process_steps_layout';
@@ -1542,6 +1552,509 @@ export interface AcfSectionsPartnerShowcaseBlock
     section_space_padding: Schema.Attribute.Component<
       'acf-sections.section-space-padding',
       false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiAnalyticsSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_analytics_section';
+  info: {
+    displayName: 'Qubi Analytics Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    features: Schema.Attribute.Component<
+      'acf-shared.qubi-analytics-section-features',
+      true
+    >;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiBlogListSection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_blog_list_sections';
+  info: {
+    description: 'Renders the blog articles from the Blog collection: optional featured article plus the latest-articles grid. The articles themselves are managed in Content Manager > Blog, not here.';
+    displayName: 'Qubi Blog List Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    main_title: Schema.Attribute.String;
+    max_posts: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<50>;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+    show_featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
+}
+
+export interface AcfSectionsQubiCalloutSection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_callout_sections';
+  info: {
+    description: 'Compact banner with icon, heading, and body text';
+    displayName: 'Qubi Callout Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.String;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiCapabilitiesSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_capabilities_section';
+  info: {
+    displayName: 'Qubi Capabilities Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    capability_items: Schema.Attribute.Component<
+      'acf-shared.qubi-capabilities-section-capability-items',
+      true
+    >;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiCaseStudiesSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_case_studies_sections';
+  info: {
+    description: 'Section heading plus large case-study cards with challenge, solution, quote, and result metrics';
+    displayName: 'Qubi Case Studies Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    case_studies: Schema.Attribute.Component<
+      'acf-shared.qubi-case-study',
+      true
+    >;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiComparisonSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_comparison_sections';
+  info: {
+    description: 'Comparison table: aspect vs competitor column vs qubi column';
+    displayName: 'Qubi Comparison Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    main_title: Schema.Attribute.Text;
+    rows: Schema.Attribute.Component<'acf-shared.qubi-comparison-row', true>;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+    them_label: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Workflow Automation Tools'>;
+    us_label: Schema.Attribute.String & Schema.Attribute.DefaultTo<'qubi'>;
+  };
+}
+
+export interface AcfSectionsQubiDemoPreview extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_demo_preview';
+  info: {
+    displayName: 'Qubi Demo Preview';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+    video: Schema.Attribute.Media<'videos'>;
+    video_duration: Schema.Attribute.String;
+    video_title: Schema.Attribute.Text;
+    video_url: Schema.Attribute.Text;
+  };
+}
+
+export interface AcfSectionsQubiDifferentiatorsSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_differentiators_sections';
+  info: {
+    description: 'Four-column grid of check-marked cards: why clients choose us';
+    displayName: 'Qubi Differentiators Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    items: Schema.Attribute.Component<
+      'acf-shared.qubi-differentiator-item',
+      true
+    >;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiExecutionSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_execution_sections';
+  info: {
+    description: 'Heading with gradient tail, three icon cards, and a highlighted callout banner';
+    displayName: 'Qubi Execution Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    callout_description: Schema.Attribute.Text;
+    callout_title: Schema.Attribute.Text;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    items: Schema.Attribute.Component<'acf-shared.qubi-icon-card-item', true>;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+    title_highlight: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsQubiFaqSection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_faq_sections';
+  info: {
+    description: 'Eyebrow, heading, and a list of question/answer cards';
+    displayName: 'Qubi FAQ Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    items: Schema.Attribute.Component<'acf-shared.qubi-faq-item', true>;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiFinalCtaSection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_final_cta_section';
+  info: {
+    displayName: 'Qubi Final CTA Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    button: Schema.Attribute.Component<'shared.menu-item', false>;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
+    main_title: Schema.Attribute.Text;
+    secondary_button: Schema.Attribute.Component<'shared.menu-item', false>;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiHomeHero extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_home_hero';
+  info: {
+    displayName: 'Qubi Home Hero';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    badge_text: Schema.Attribute.String;
+    button: Schema.Attribute.Component<'shared.menu-item', false>;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
+    hero_image: Schema.Attribute.Media<'images'>;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiHowItWorksSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_how_it_works_section';
+  info: {
+    displayName: 'Qubi How It Works Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+    steps: Schema.Attribute.Component<
+      'acf-shared.qubi-how-it-works-section-steps',
+      true
+    >;
+  };
+}
+
+export interface AcfSectionsQubiHumanInLoopSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_human_in_loop';
+  info: {
+    displayName: 'Qubi Human In Loop Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    badges: Schema.Attribute.Component<
+      'acf-shared.qubi-human-in-loop-section-badges',
+      true
+    >;
+    button: Schema.Attribute.Component<'shared.menu-item', false>;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
+    eyebrow: Schema.Attribute.String;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiIconGridSection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_icon_grid_sections';
+  info: {
+    description: 'Centered grid of icon cards with section heading (e.g. platform components)';
+    displayName: 'Qubi Icon Grid Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    eyebrow: Schema.Attribute.String;
+    items: Schema.Attribute.Component<'acf-shared.qubi-icon-card-item', true>;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiIntegrationSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_integration_section';
+  info: {
+    displayName: 'Qubi Integration Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
+    eyebrow: Schema.Attribute.String;
+    integration_items: Schema.Attribute.Component<
+      'acf-shared.qubi-integration-section-integration-items',
+      true
+    >;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiOutcomesSection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_outcomes_section';
+  info: {
+    displayName: 'Qubi Outcomes Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    main_title: Schema.Attribute.Text;
+    outcome_items: Schema.Attribute.Component<
+      'acf-shared.qubi-outcomes-section-outcome-items',
+      true
+    >;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiPlansSection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_plans_sections';
+  info: {
+    description: 'Pricing plan cards with feature lists and a highlight option';
+    displayName: 'Qubi Plans Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    cta_url: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    eyebrow: Schema.Attribute.String;
+    main_title: Schema.Attribute.Text;
+    plans: Schema.Attribute.Component<'acf-shared.qubi-plan-item', true>;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiProblemSection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_problem_section';
+  info: {
+    displayName: 'Qubi Problem Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
+    main_title: Schema.Attribute.Text;
+    problem_items: Schema.Attribute.Component<
+      'acf-shared.qubi-problem-section-problem-items',
+      true
+    >;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiSimpleHero extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_simple_heroes';
+  info: {
+    description: 'Centered text-only page hero: badge, title, description';
+    displayName: 'Qubi Simple Hero';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    badge_text: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiStatsSection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_stats_sections';
+  info: {
+    description: 'Horizontal bar of big stat numbers with labels';
+    displayName: 'Qubi Stats Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+    stats: Schema.Attribute.Component<'acf-shared.qubi-stat-item', true>;
+  };
+}
+
+export interface AcfSectionsQubiStorySection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_story_sections';
+  info: {
+    description: 'Eyebrow, heading, story paragraphs, and a row of stat cards';
+    displayName: 'Qubi Story Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    main_title: Schema.Attribute.Text;
+    paragraphs: Schema.Attribute.Component<
+      'acf-shared.qubi-text-paragraph',
+      true
+    >;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+    stats: Schema.Attribute.Component<'acf-shared.qubi-stat-item', true>;
+  };
+}
+
+export interface AcfSectionsQubiSubscribeCtaSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_subscribe_cta_sections';
+  info: {
+    description: 'Centered heading, supporting text, and a single action button on a tinted band';
+    displayName: 'Qubi Subscribe CTA Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    button: Schema.Attribute.Component<'shared.menu-item', false>;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsQubiUseCasesSection extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_use_cases_section';
+  info: {
+    displayName: 'Qubi Use Cases Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+    use_case_items: Schema.Attribute.Component<
+      'acf-shared.qubi-use-cases-section-use-case-items',
+      true
     >;
   };
 }
@@ -2927,6 +3440,226 @@ export interface AcfSharedPartnerShowcaseBlockPartnerLogos
   };
 }
 
+export interface AcfSharedQubiAnalyticsSectionFeatures
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_analytics_features';
+  info: {
+    displayName: 'Qubi Analytics Section Features';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText;
+    icon: Schema.Attribute.String;
+    title: Schema.Attribute.Text;
+  };
+}
+
+export interface AcfSharedQubiCapabilitiesSectionCapabilityItems
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_capability_items';
+  info: {
+    displayName: 'Qubi Capabilities Section Capability Items';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText;
+    icon: Schema.Attribute.String;
+    title: Schema.Attribute.Text;
+  };
+}
+
+export interface AcfSharedQubiCaseMetric extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_case_metrics';
+  info: {
+    displayName: 'Qubi Case Metric';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    metric_type: Schema.Attribute.Enumeration<
+      ['before_after', 'reduction', 'value']
+    > &
+      Schema.Attribute.DefaultTo<'value'>;
+    primary_value: Schema.Attribute.String;
+    secondary_value: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedQubiCaseStudy extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_case_studies';
+  info: {
+    displayName: 'Qubi Case Study';
+  };
+  attributes: {
+    challenge: Schema.Attribute.Text;
+    industry: Schema.Attribute.String;
+    metrics: Schema.Attribute.Component<'acf-shared.qubi-case-metric', true>;
+    quote: Schema.Attribute.Text;
+    quote_role: Schema.Attribute.String;
+    solution: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedQubiComparisonRow extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_comparison_rows';
+  info: {
+    displayName: 'Qubi Comparison Row';
+  };
+  attributes: {
+    aspect: Schema.Attribute.String;
+    them: Schema.Attribute.String;
+    us: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedQubiDifferentiatorItem
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_differentiator_items';
+  info: {
+    displayName: 'Qubi Differentiator Item';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedQubiFaqItem extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_faq_items';
+  info: {
+    displayName: 'Qubi FAQ Item';
+  };
+  attributes: {
+    answer: Schema.Attribute.Text;
+    question: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedQubiHowItWorksSectionSteps
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_hiw_steps';
+  info: {
+    displayName: 'Qubi How It Works Section Steps';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText;
+    icon: Schema.Attribute.String;
+    step_number: Schema.Attribute.String;
+    title: Schema.Attribute.Text;
+  };
+}
+
+export interface AcfSharedQubiHumanInLoopSectionBadges
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_hil_badges';
+  info: {
+    displayName: 'Qubi Human In Loop Section Badges';
+  };
+  attributes: {
+    title: Schema.Attribute.Text;
+  };
+}
+
+export interface AcfSharedQubiIconCardItem extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_icon_card_items';
+  info: {
+    displayName: 'Qubi Icon Card Item';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedQubiIntegrationSectionIntegrationItems
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_integration_items';
+  info: {
+    displayName: 'Qubi Integration Section Integration Items';
+  };
+  attributes: {
+    count: Schema.Attribute.String;
+    icon: Schema.Attribute.String;
+    label: Schema.Attribute.Text;
+  };
+}
+
+export interface AcfSharedQubiOutcomesSectionOutcomeItems
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_outcome_items';
+  info: {
+    displayName: 'Qubi Outcomes Section Outcome Items';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText;
+    icon: Schema.Attribute.String;
+    title: Schema.Attribute.Text;
+  };
+}
+
+export interface AcfSharedQubiPlanItem extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_plan_items';
+  info: {
+    displayName: 'Qubi Plan Item';
+  };
+  attributes: {
+    cta_label: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    features: Schema.Attribute.Component<
+      'acf-shared.qubi-text-paragraph',
+      true
+    >;
+    highlight: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    tagline: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedQubiProblemSectionProblemItems
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_problem_items';
+  info: {
+    displayName: 'Qubi Problem Section Problem Items';
+  };
+  attributes: {
+    icon: Schema.Attribute.String;
+    title: Schema.Attribute.Text;
+  };
+}
+
+export interface AcfSharedQubiStatItem extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_stat_items';
+  info: {
+    displayName: 'Qubi Stat Item';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    value: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedQubiTextParagraph extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_text_paragraphs';
+  info: {
+    displayName: 'Qubi Text Paragraph';
+  };
+  attributes: {
+    text: Schema.Attribute.Text;
+  };
+}
+
+export interface AcfSharedQubiUseCasesSectionUseCaseItems
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_use_case_items';
+  info: {
+    displayName: 'Qubi Use Cases Section Use Case Items';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText;
+    icon: Schema.Attribute.String;
+    title: Schema.Attribute.Text;
+  };
+}
+
 export interface AcfSharedResourceGridLayoutItems
   extends Struct.ComponentSchema {
   collectionName: 'components_acf_shared_resource_grid_layout_items';
@@ -3454,11 +4187,13 @@ export interface SharedSeo extends Struct.ComponentSchema {
   };
   attributes: {
     canonicalUrl: Schema.Attribute.String;
+    contentAiScore: Schema.Attribute.String;
     keywords: Schema.Attribute.String;
     metaDescription: Schema.Attribute.Text;
     metaTitle: Schema.Attribute.String;
     noIndex: Schema.Attribute.Boolean;
     ogImage: Schema.Attribute.Media;
+    seoScore: Schema.Attribute.String;
   };
 }
 
@@ -3513,6 +4248,7 @@ declare module '@strapi/strapi' {
       'acf-sections.grid-layout': AcfSectionsGridLayout;
       'acf-sections.healthcare-automation-solutions': AcfSectionsHealthcareAutomationSolutions;
       'acf-sections.healthcare-automation-tabs': AcfSectionsHealthcareAutomationTabs;
+      'acf-sections.hero': AcfSectionsHero;
       'acf-sections.hiring-process-steps-layout': AcfSectionsHiringProcessStepsLayout;
       'acf-sections.home-automation-edge': AcfSectionsHomeAutomationEdge;
       'acf-sections.home-award-winner': AcfSectionsHomeAwardWinner;
@@ -3539,6 +4275,30 @@ declare module '@strapi/strapi' {
       'acf-sections.package-card-section': AcfSectionsPackageCardSection;
       'acf-sections.partner-highlight-section': AcfSectionsPartnerHighlightSection;
       'acf-sections.partner-showcase-block': AcfSectionsPartnerShowcaseBlock;
+      'acf-sections.qubi-analytics-section': AcfSectionsQubiAnalyticsSection;
+      'acf-sections.qubi-blog-list-section': AcfSectionsQubiBlogListSection;
+      'acf-sections.qubi-callout-section': AcfSectionsQubiCalloutSection;
+      'acf-sections.qubi-capabilities-section': AcfSectionsQubiCapabilitiesSection;
+      'acf-sections.qubi-case-studies-section': AcfSectionsQubiCaseStudiesSection;
+      'acf-sections.qubi-comparison-section': AcfSectionsQubiComparisonSection;
+      'acf-sections.qubi-demo-preview': AcfSectionsQubiDemoPreview;
+      'acf-sections.qubi-differentiators-section': AcfSectionsQubiDifferentiatorsSection;
+      'acf-sections.qubi-execution-section': AcfSectionsQubiExecutionSection;
+      'acf-sections.qubi-faq-section': AcfSectionsQubiFaqSection;
+      'acf-sections.qubi-final-cta-section': AcfSectionsQubiFinalCtaSection;
+      'acf-sections.qubi-home-hero': AcfSectionsQubiHomeHero;
+      'acf-sections.qubi-how-it-works-section': AcfSectionsQubiHowItWorksSection;
+      'acf-sections.qubi-human-in-loop-section': AcfSectionsQubiHumanInLoopSection;
+      'acf-sections.qubi-icon-grid-section': AcfSectionsQubiIconGridSection;
+      'acf-sections.qubi-integration-section': AcfSectionsQubiIntegrationSection;
+      'acf-sections.qubi-outcomes-section': AcfSectionsQubiOutcomesSection;
+      'acf-sections.qubi-plans-section': AcfSectionsQubiPlansSection;
+      'acf-sections.qubi-problem-section': AcfSectionsQubiProblemSection;
+      'acf-sections.qubi-simple-hero': AcfSectionsQubiSimpleHero;
+      'acf-sections.qubi-stats-section': AcfSectionsQubiStatsSection;
+      'acf-sections.qubi-story-section': AcfSectionsQubiStorySection;
+      'acf-sections.qubi-subscribe-cta-section': AcfSectionsQubiSubscribeCtaSection;
+      'acf-sections.qubi-use-cases-section': AcfSectionsQubiUseCasesSection;
       'acf-sections.resource-grid-layout': AcfSectionsResourceGridLayout;
       'acf-sections.roundtable-sessions-sections': AcfSectionsRoundtableSessionsSections;
       'acf-sections.section-heading-with-columns': AcfSectionsSectionHeadingWithColumns;
@@ -3617,6 +4377,23 @@ declare module '@strapi/strapi' {
       'acf-shared.package-card-section-package-cards-features': AcfSharedPackageCardSectionPackageCardsFeatures;
       'acf-shared.partner-highlight-section-partner-highlights': AcfSharedPartnerHighlightSectionPartnerHighlights;
       'acf-shared.partner-showcase-block-partner-logos': AcfSharedPartnerShowcaseBlockPartnerLogos;
+      'acf-shared.qubi-analytics-section-features': AcfSharedQubiAnalyticsSectionFeatures;
+      'acf-shared.qubi-capabilities-section-capability-items': AcfSharedQubiCapabilitiesSectionCapabilityItems;
+      'acf-shared.qubi-case-metric': AcfSharedQubiCaseMetric;
+      'acf-shared.qubi-case-study': AcfSharedQubiCaseStudy;
+      'acf-shared.qubi-comparison-row': AcfSharedQubiComparisonRow;
+      'acf-shared.qubi-differentiator-item': AcfSharedQubiDifferentiatorItem;
+      'acf-shared.qubi-faq-item': AcfSharedQubiFaqItem;
+      'acf-shared.qubi-how-it-works-section-steps': AcfSharedQubiHowItWorksSectionSteps;
+      'acf-shared.qubi-human-in-loop-section-badges': AcfSharedQubiHumanInLoopSectionBadges;
+      'acf-shared.qubi-icon-card-item': AcfSharedQubiIconCardItem;
+      'acf-shared.qubi-integration-section-integration-items': AcfSharedQubiIntegrationSectionIntegrationItems;
+      'acf-shared.qubi-outcomes-section-outcome-items': AcfSharedQubiOutcomesSectionOutcomeItems;
+      'acf-shared.qubi-plan-item': AcfSharedQubiPlanItem;
+      'acf-shared.qubi-problem-section-problem-items': AcfSharedQubiProblemSectionProblemItems;
+      'acf-shared.qubi-stat-item': AcfSharedQubiStatItem;
+      'acf-shared.qubi-text-paragraph': AcfSharedQubiTextParagraph;
+      'acf-shared.qubi-use-cases-section-use-case-items': AcfSharedQubiUseCasesSectionUseCaseItems;
       'acf-shared.resource-grid-layout-items': AcfSharedResourceGridLayoutItems;
       'acf-shared.roundtable-sessions-sections-roundtables': AcfSharedRoundtableSessionsSectionsRoundtables;
       'acf-shared.roundtable-sessions-sections-roundtables-table': AcfSharedRoundtableSessionsSectionsRoundtablesTable;

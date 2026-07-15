@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_acf_shared_qubi_text_paragraphs",
+  "info": {
+    "displayName": "Qubi Text Paragraph"
+  },
+  "attributes": {
+    "text": {
+      "type": "text"
+    }
+  }
+}

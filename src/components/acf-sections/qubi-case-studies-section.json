@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_acf_sections_qubi_case_studies_sections",
+  "info": {
+    "displayName": "Qubi Case Studies Section",
+    "description": "Section heading plus large case-study cards with challenge, solution, quote, and result metrics"
+  },
+  "attributes": {
+    "section_space_padding": {
+      "type": "component",
+      "repeatable": false,
+      "component": "acf-sections.section-space-padding"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "main_title": {
+      "type": "text"
+    },
+    "case_studies": {
+      "type": "component",
+      "repeatable": true,
+      "component": "acf-shared.qubi-case-study"
+    },
+    "class_name": {
+      "type": "string"
+    },
+    "acf_id": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_acf_shared_qubi_hil_badges",
+  "info": {
+    "displayName": "Qubi Human In Loop Section Badges"
+  },
+  "attributes": {
+    "title": {
+      "type": "text"
+    }
+  }
+}

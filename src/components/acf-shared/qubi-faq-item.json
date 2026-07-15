@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_acf_shared_qubi_faq_items",
+  "info": {
+    "displayName": "Qubi FAQ Item"
+  },
+  "attributes": {
+    "question": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "text"
+    }
+  }
+}

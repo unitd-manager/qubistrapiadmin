@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_acf_sections_qubi_integration_section",
+  "info": {
+    "displayName": "Qubi Integration Section"
+  },
+  "attributes": {
+    "section_space_padding": {
+      "type": "component",
+      "repeatable": false,
+      "component": "acf-sections.section-space-padding"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "main_title": {
+      "type": "text"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "integration_items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "acf-shared.qubi-integration-section-integration-items"
+    },
+    "class_name": {
+      "type": "string"
+    },
+    "acf_id": {
+      "type": "string"
+    }
+  }
+}

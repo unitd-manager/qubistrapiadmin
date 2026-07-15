@@ -107,6 +107,33 @@ const SHARED_FEATURE_COMPONENTS = [
   "acf-sections.partner-showcase-block",
 ];
 
+const QUBI_COMPONENTS = [
+  "acf-sections.qubi-home-hero",
+  "acf-sections.qubi-demo-preview",
+  "acf-sections.qubi-problem-section",
+  "acf-sections.qubi-capabilities-section",
+  "acf-sections.qubi-outcomes-section",
+  "acf-sections.qubi-how-it-works-section",
+  "acf-sections.qubi-use-cases-section",
+  "acf-sections.qubi-integration-section",
+  "acf-sections.qubi-human-in-loop-section",
+  "acf-sections.qubi-analytics-section",
+  "acf-sections.qubi-final-cta-section",
+  "acf-sections.qubi-simple-hero",
+  "acf-sections.qubi-stats-section",
+  "acf-sections.qubi-case-studies-section",
+  "acf-sections.qubi-story-section",
+  "acf-sections.qubi-differentiators-section",
+  "acf-sections.qubi-callout-section",
+  "acf-sections.qubi-plans-section",
+  "acf-sections.qubi-icon-grid-section",
+  "acf-sections.qubi-execution-section",
+  "acf-sections.qubi-comparison-section",
+  "acf-sections.qubi-faq-section",
+  "acf-sections.qubi-blog-list-section",
+  "acf-sections.qubi-subscribe-cta-section",
+];
+
 const PAGE_BUILDER_COMPONENTS = [
   ...HOME_COMPONENTS,
   ...COMMON_COMPONENTS,
@@ -115,12 +142,14 @@ const PAGE_BUILDER_COMPONENTS = [
   ...ABOUT_COMPONENTS,
   ...TEAM_CAREER_COMPONENTS,
   ...SHARED_FEATURE_COMPONENTS,
+  ...QUBI_COMPONENTS,
 ];
 
 const LANDING_SECTION_COMPONENTS = [
   ...HOME_COMPONENTS,
   ...COMMON_COMPONENTS,
   ...SHARED_FEATURE_COMPONENTS,
+  ...QUBI_COMPONENTS,
 ];
 
 const BLOG_SECTION_COMPONENTS = [

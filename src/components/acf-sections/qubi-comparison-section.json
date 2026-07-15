@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_acf_sections_qubi_comparison_sections",
+  "info": {
+    "displayName": "Qubi Comparison Section",
+    "description": "Comparison table: aspect vs competitor column vs qubi column"
+  },
+  "attributes": {
+    "section_space_padding": {
+      "type": "component",
+      "repeatable": false,
+      "component": "acf-sections.section-space-padding"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "main_title": {
+      "type": "text"
+    },
+    "them_label": {
+      "type": "string",
+      "default": "Workflow Automation Tools"
+    },
+    "us_label": {
+      "type": "string",
+      "default": "qubi"
+    },
+    "rows": {
+      "type": "component",
+      "repeatable": true,
+      "component": "acf-shared.qubi-comparison-row"
+    },
+    "class_name": {
+      "type": "string"
+    },
+    "acf_id": {
+      "type": "string"
+    }
+  }
+}

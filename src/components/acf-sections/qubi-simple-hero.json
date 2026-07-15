@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_acf_sections_qubi_simple_heroes",
+  "info": {
+    "displayName": "Qubi Simple Hero",
+    "description": "Centered text-only page hero: badge, title, description"
+  },
+  "attributes": {
+    "section_space_padding": {
+      "type": "component",
+      "repeatable": false,
+      "component": "acf-sections.section-space-padding"
+    },
+    "badge_text": {
+      "type": "string"
+    },
+    "main_title": {
+      "type": "text"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "class_name": {
+      "type": "string"
+    },
+    "acf_id": {
+      "type": "string"
+    }
+  }
+}
