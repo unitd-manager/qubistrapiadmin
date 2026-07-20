@@ -472,6 +472,46 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
+  collectionName: 'blogs';
+  info: {
+    description: 'Blog articles shown on /resources/blog. Mirrors the production blog schema.';
+    displayName: 'Blog';
+    pluralName: 'blogs';
+    singularName: 'blog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    author: Schema.Attribute.String;
+    category_id: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    creation_date: Schema.Attribute.DateTime;
+    date: Schema.Attribute.Date;
+    description: Schema.Attribute.RichText;
+    flag: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    images: Schema.Attribute.Media<'images', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
+      Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_keyword: Schema.Attribute.String;
+    meta_title: Schema.Attribute.String;
+    modification_date: Schema.Attribute.DateTime;
+    published: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    us_description: Schema.Attribute.Text;
+    us_title: Schema.Attribute.String;
+  };
+}
+
 export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
   collectionName: 'case_studies';
   info: {
@@ -792,6 +832,8 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'acf-sections.qubi-execution-section',
         'acf-sections.qubi-comparison-section',
         'acf-sections.qubi-faq-section',
+        'acf-sections.qubi-blog-list-section',
+        'acf-sections.qubi-subscribe-cta-section',
       ]
     >;
     pageType: Schema.Attribute.Enumeration<
@@ -1596,6 +1638,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::author.author': ApiAuthorAuthor;
+      'api::blog.blog': ApiBlogBlog;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
       'api::category.category': ApiCategoryCategory;
       'api::comment.comment': ApiCommentComment;
