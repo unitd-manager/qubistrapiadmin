@@ -6,6 +6,10 @@
     "singularName": "resource-page",
     "pluralName": "resource-pages"
   },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string"
@@ -48,7 +52,14 @@
         "acf-sections.roundtable-sessions-sections",
         "acf-sections.spacing",
         "acf-sections.section-space-padding",
-        "acf-sections.unmapped-layout"
+        "acf-sections.unmapped-layout",
+        "acf-sections.demo-sections-hero",
+        "acf-sections.demo-sections-video-showcase",
+        "acf-sections.demo-sections-capability-card",
+        "acf-sections.demo-sections-contact-cta",
+        "acf-sections.faq-hero",
+        "acf-sections.faq-list",
+        "acf-sections.faq-cta"
       ]
     }
   }

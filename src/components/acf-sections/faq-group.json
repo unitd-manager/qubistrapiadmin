@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_acf_sections_faq_groups",
+  "info": {
+    "displayName": "faq-group"
+  },
+  "options": {},
+  "attributes": {
+    "faq": {
+      "type": "component",
+      "component": "acf-sections.faq-item",
+      "repeatable": true
+    },
+    "group_title": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

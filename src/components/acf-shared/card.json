@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_acf_shared_cards",
+  "info": {
+    "displayName": "card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "duration_badge": {
+      "type": "string"
+    },
+    "bullet_points": {
+      "type": "component",
+      "component": "acf-shared.bullet-points",
+      "repeatable": true
+    },
+    "cta_label": {
+      "type": "string"
+    },
+    "cta_link": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
