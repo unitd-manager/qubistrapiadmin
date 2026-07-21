@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_acf_sections_solutions_execution_flows",
+  "info": {
+    "displayName": "Solutions - Execution Flow",
+    "icon": "layout"
+  },
+  "attributes": {
+    "eyebrowLabel": { "type": "string" },
+    "heading": { "type": "string" },
+    "highlightedHeading": { "type": "string" },
+    "steps": {
+      "type": "component",
+      "repeatable": true,
+      "component": "acf-shared.solutions-execution-flow-step"
+    }
+  }
+}

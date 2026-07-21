@@ -792,6 +792,8 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'acf-sections.qubi-execution-section',
         'acf-sections.qubi-comparison-section',
         'acf-sections.qubi-faq-section',
+        'acf-sections.qubi-blog-list-section',
+        'acf-sections.qubi-subscribe-cta-section',
       ]
     >;
     pageType: Schema.Attribute.Enumeration<

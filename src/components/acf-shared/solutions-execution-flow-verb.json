@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_acf_shared_solutions_execution_flow_verbs",
+  "info": {
+    "displayName": "Solutions Execution Flow Verb"
+  },
+  "attributes": {
+    "label": { "type": "string" },
+    "detail": { "type": "string" }
+  }
+}

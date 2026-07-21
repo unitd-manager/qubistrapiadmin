@@ -2278,6 +2278,47 @@ export interface AcfSectionsSolutionHeroBannerWithCta
   };
 }
 
+export interface AcfSectionsSolutionsComparisonBlock
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_solutions_comparison_blocks';
+  info: {
+    displayName: 'Solutions Comparison Block';
+    icon: 'layout';
+  };
+  attributes: {
+    heading: Schema.Attribute.String;
+    highlightedHeading: Schema.Attribute.String;
+    othersItems: Schema.Attribute.Component<
+      'acf-shared.solutions-comparison-item',
+      true
+    >;
+    othersLabel: Schema.Attribute.String;
+    qubiItems: Schema.Attribute.Component<
+      'acf-shared.solutions-comparison-item',
+      true
+    >;
+    qubiLabel: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsSolutionsExecutionFlow
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_solutions_execution_flows';
+  info: {
+    displayName: 'Solutions - Execution Flow';
+    icon: 'layout';
+  };
+  attributes: {
+    eyebrowLabel: Schema.Attribute.String;
+    heading: Schema.Attribute.String;
+    highlightedHeading: Schema.Attribute.String;
+    steps: Schema.Attribute.Component<
+      'acf-shared.solutions-execution-flow-step',
+      true
+    >;
+  };
+}
+
 export interface AcfSectionsSolutionsFeatureBlock
   extends Struct.ComponentSchema {
   collectionName: 'components_acf_sections_solutions_feature_block';
@@ -2298,6 +2339,60 @@ export interface AcfSectionsSolutionsFeatureBlock
     highlighted_description: Schema.Attribute.RichText;
     highlighted_subtitle: Schema.Attribute.Text;
     main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
+export interface AcfSectionsSolutionsFinalCta extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_solutions_final_cta';
+  info: {
+    displayName: 'Solutions Final CTA';
+  };
+  attributes: {
+    buttonLabel: Schema.Attribute.String;
+    buttonUrl: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    heading: Schema.Attribute.String;
+    highlightedHeading: Schema.Attribute.String;
+    trailingHeading: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsSolutionsHeroBanner extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_solutions_hero_banners';
+  info: {
+    displayName: 'Solutions - Hero Banner';
+    icon: 'picture';
+  };
+  attributes: {
+    badgeLabel: Schema.Attribute.String;
+    buttonLabel: Schema.Attribute.String;
+    buttonUrl: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    heading: Schema.Attribute.String;
+    highlightedHeading: Schema.Attribute.String;
+    trailingHeading: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsSolutionsIndustryLayout
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_solutions_industry_layout';
+  info: {
+    displayName: 'Solutions Industry Layout';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
+    industry_cards: Schema.Attribute.Component<
+      'acf-shared.solutions-industry-layout-industry-cards',
+      true
+    >;
+    main_title: Schema.Attribute.String;
     section_space_padding: Schema.Attribute.Component<
       'acf-sections.section-space-padding',
       false
@@ -2326,6 +2421,57 @@ export interface AcfSectionsSolutionsKeyBenefits
     section_space_padding: Schema.Attribute.Component<
       'acf-sections.section-space-padding',
       false
+    >;
+  };
+}
+
+export interface AcfSectionsSolutionsProblemsBlock
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_solutions_problems_blocks';
+  info: {
+    displayName: 'Solutions Problems Block';
+    icon: 'layout';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    eyebrowLabel: Schema.Attribute.String;
+    heading: Schema.Attribute.String;
+    problems: Schema.Attribute.Component<
+      'acf-shared.solutions-problem-item',
+      true
+    >;
+  };
+}
+
+export interface AcfSectionsSolutionsStatsBand extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_solutions_stats_bands';
+  info: {
+    displayName: 'Solutions - Stats Band';
+    icon: 'chart-bars';
+  };
+  attributes: {
+    stats: Schema.Attribute.Component<
+      'acf-shared.solutions-stats-band-item',
+      true
+    >;
+  };
+}
+
+export interface AcfSectionsSolutionsUseCasesLayout
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_solutions_use_cases_layouts';
+  info: {
+    displayName: 'Solutions - Use Cases Layout';
+    icon: 'grid';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    eyebrowLabel: Schema.Attribute.String;
+    heading: Schema.Attribute.String;
+    highlightedHeading: Schema.Attribute.String;
+    useCases: Schema.Attribute.Component<
+      'acf-shared.solutions-use-cases-layout-items',
+      true
     >;
   };
 }
@@ -3841,6 +3987,30 @@ export interface AcfSharedSolutionHeroBannerWithCtaButtons
   };
 }
 
+export interface AcfSharedSolutionsComparisonItem
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_comparison_items';
+  info: {
+    displayName: 'Solutions Comparison Item';
+  };
+  attributes: {
+    text: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedSolutionsExecutionFlowStep
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_execution_flow_steps';
+  info: {
+    displayName: 'Solutions Execution Flow Step';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface AcfSharedSolutionsFeatureBlockFeatures
   extends Struct.ComponentSchema {
   collectionName: 'components_acf_shared_solutions_feature_block_features';
@@ -3868,6 +4038,35 @@ export interface AcfSharedSolutionsFeatureBlockFeaturesFeatureList
   };
 }
 
+export interface AcfSharedSolutionsIndustryLayoutHighlightItem
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_industry_layout_highlight_items';
+  info: {
+    displayName: 'Solutions Industry Highlight Item';
+  };
+  attributes: {
+    text: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedSolutionsIndustryLayoutIndustryCards
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_industry_layout_cards';
+  info: {
+    displayName: 'Solutions Industry Card';
+  };
+  attributes: {
+    categoryLabel: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    highlights: Schema.Attribute.Component<
+      'acf-shared.solutions-industry-layout-highlight-item',
+      true
+    >;
+    icon: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface AcfSharedSolutionsKeyBenefitsBenefits
   extends Struct.ComponentSchema {
   collectionName: 'components_acf_shared_solutions_key_benefits_benefits';
@@ -3877,6 +4076,58 @@ export interface AcfSharedSolutionsKeyBenefitsBenefits
   attributes: {
     description: Schema.Attribute.Text;
     title: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedSolutionsProblemItem extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_problem_items';
+  info: {
+    displayName: 'Solutions Problem Item';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedSolutionsStatsBandItem
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_stats_band_items';
+  info: {
+    displayName: 'Solutions Stat Item';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    value: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedSolutionsUseCasesLayoutItems
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_use_cases_layout_items';
+  info: {
+    displayName: 'Solutions Use Case Item';
+  };
+  attributes: {
+    categoryLabel: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.String;
+    stats: Schema.Attribute.Component<
+      'acf-shared.solutions-use-cases-layout-stat-item',
+      true
+    >;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedSolutionsUseCasesLayoutStatItem
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_use_cases_layout_stat_items';
+  info: {
+    displayName: 'Solutions Use Case Stat Item';
+  };
+  attributes: {
+    text: Schema.Attribute.String;
   };
 }
 
@@ -4307,8 +4558,16 @@ declare module '@strapi/strapi' {
       'acf-sections.session-item-sections': AcfSectionsSessionItemSections;
       'acf-sections.side-image-info-blocks': AcfSectionsSideImageInfoBlocks;
       'acf-sections.solution-hero-banner-with-cta': AcfSectionsSolutionHeroBannerWithCta;
+      'acf-sections.solutions-comparison-block': AcfSectionsSolutionsComparisonBlock;
+      'acf-sections.solutions-execution-flow': AcfSectionsSolutionsExecutionFlow;
       'acf-sections.solutions-feature-block': AcfSectionsSolutionsFeatureBlock;
+      'acf-sections.solutions-final-cta': AcfSectionsSolutionsFinalCta;
+      'acf-sections.solutions-hero-banner': AcfSectionsSolutionsHeroBanner;
+      'acf-sections.solutions-industry-layout': AcfSectionsSolutionsIndustryLayout;
       'acf-sections.solutions-key-benefits': AcfSectionsSolutionsKeyBenefits;
+      'acf-sections.solutions-problems-block': AcfSectionsSolutionsProblemsBlock;
+      'acf-sections.solutions-stats-band': AcfSectionsSolutionsStatsBand;
+      'acf-sections.solutions-use-cases-layout': AcfSectionsSolutionsUseCasesLayout;
       'acf-sections.spacing': AcfSectionsSpacing;
       'acf-sections.step-cards-section': AcfSectionsStepCardsSection;
       'acf-sections.team-highlight-block': AcfSectionsTeamHighlightBlock;
@@ -4407,9 +4666,17 @@ declare module '@strapi/strapi' {
       'acf-shared.session-item-sections-session-tabs-sessions': AcfSharedSessionItemSectionsSessionTabsSessions;
       'acf-shared.side-image-info-blocks-info-list': AcfSharedSideImageInfoBlocksInfoList;
       'acf-shared.solution-hero-banner-with-cta-buttons': AcfSharedSolutionHeroBannerWithCtaButtons;
+      'acf-shared.solutions-comparison-item': AcfSharedSolutionsComparisonItem;
+      'acf-shared.solutions-execution-flow-step': AcfSharedSolutionsExecutionFlowStep;
       'acf-shared.solutions-feature-block-features': AcfSharedSolutionsFeatureBlockFeatures;
       'acf-shared.solutions-feature-block-features-feature-list': AcfSharedSolutionsFeatureBlockFeaturesFeatureList;
+      'acf-shared.solutions-industry-layout-highlight-item': AcfSharedSolutionsIndustryLayoutHighlightItem;
+      'acf-shared.solutions-industry-layout-industry-cards': AcfSharedSolutionsIndustryLayoutIndustryCards;
       'acf-shared.solutions-key-benefits-benefits': AcfSharedSolutionsKeyBenefitsBenefits;
+      'acf-shared.solutions-problem-item': AcfSharedSolutionsProblemItem;
+      'acf-shared.solutions-stats-band-item': AcfSharedSolutionsStatsBandItem;
+      'acf-shared.solutions-use-cases-layout-items': AcfSharedSolutionsUseCasesLayoutItems;
+      'acf-shared.solutions-use-cases-layout-stat-item': AcfSharedSolutionsUseCasesLayoutStatItem;
       'acf-shared.step-cards-section-steps': AcfSharedStepCardsSectionSteps;
       'acf-shared.step-cards-section-steps-list': AcfSharedStepCardsSectionStepsList;
       'acf-shared.text-table-block-table': AcfSharedTextTableBlockTable;
