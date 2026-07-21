@@ -4011,6 +4011,18 @@ export interface AcfSharedSolutionsExecutionFlowStep
   };
 }
 
+export interface AcfSharedSolutionsExecutionFlowVerb
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_execution_flow_verbs';
+  info: {
+    displayName: 'Solutions Execution Flow Verb';
+  };
+  attributes: {
+    detail: Schema.Attribute.String;
+    label: Schema.Attribute.String;
+  };
+}
+
 export interface AcfSharedSolutionsFeatureBlockFeatures
   extends Struct.ComponentSchema {
   collectionName: 'components_acf_shared_solutions_feature_block_features';
@@ -4668,6 +4680,7 @@ declare module '@strapi/strapi' {
       'acf-shared.solution-hero-banner-with-cta-buttons': AcfSharedSolutionHeroBannerWithCtaButtons;
       'acf-shared.solutions-comparison-item': AcfSharedSolutionsComparisonItem;
       'acf-shared.solutions-execution-flow-step': AcfSharedSolutionsExecutionFlowStep;
+      'acf-shared.solutions-execution-flow-verb': AcfSharedSolutionsExecutionFlowVerb;
       'acf-shared.solutions-feature-block-features': AcfSharedSolutionsFeatureBlockFeatures;
       'acf-shared.solutions-feature-block-features-feature-list': AcfSharedSolutionsFeatureBlockFeaturesFeatureList;
       'acf-shared.solutions-industry-layout-highlight-item': AcfSharedSolutionsIndustryLayoutHighlightItem;
