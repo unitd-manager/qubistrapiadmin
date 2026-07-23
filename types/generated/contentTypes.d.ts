@@ -472,6 +472,46 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
+  collectionName: 'blogs';
+  info: {
+    description: 'Blog articles shown on /resources/blog. Mirrors the production blog schema.';
+    displayName: 'Blog';
+    pluralName: 'blogs';
+    singularName: 'blog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    author: Schema.Attribute.String;
+    category_id: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    creation_date: Schema.Attribute.DateTime;
+    date: Schema.Attribute.Date;
+    description: Schema.Attribute.RichText;
+    flag: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    images: Schema.Attribute.Media<'images', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
+      Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_keyword: Schema.Attribute.String;
+    meta_title: Schema.Attribute.String;
+    modification_date: Schema.Attribute.DateTime;
+    published: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    us_description: Schema.Attribute.Text;
+    us_title: Schema.Attribute.String;
+  };
+}
+
 export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
   collectionName: 'case_studies';
   info: {
@@ -570,6 +610,60 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     url: Schema.Attribute.String;
     wpCommentId: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiEnquiryEnquiry extends Struct.CollectionTypeSchema {
+  collectionName: 'enquiries';
+  info: {
+    description: '';
+    displayName: 'Enquiry';
+    pluralName: 'enquiries';
+    singularName: 'enquiry';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    address_country: Schema.Attribute.String;
+    client_type: Schema.Attribute.String;
+    comments: Schema.Attribute.Text;
+    company: Schema.Attribute.String;
+    country: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    creation_date: Schema.Attribute.DateTime;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    enquiry_type: Schema.Attribute.String;
+    fax: Schema.Attribute.String;
+    first_name: Schema.Attribute.String;
+    flag: Schema.Attribute.Boolean;
+    follow_up_date: Schema.Attribute.DateTime;
+    last_name: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::enquiry.enquiry'
+    > &
+      Schema.Attribute.Private;
+    modification_date: Schema.Attribute.DateTime;
+    name: Schema.Attribute.String;
+    notes: Schema.Attribute.Text;
+    phone: Schema.Attribute.String;
+    phone_area_code: Schema.Attribute.String;
+    preferred_contact: Schema.Attribute.String;
+    preferred_time: Schema.Attribute.String;
+    product: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    service: Schema.Attribute.String;
+    staff_id: Schema.Attribute.Integer;
+    status: Schema.Attribute.Enumeration<['new', 'in_progress', 'closed']> &
+      Schema.Attribute.DefaultTo<'new'>;
+    subject: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -952,6 +1046,13 @@ export interface ApiResourcePageResourcePage
         'acf-sections.spacing',
         'acf-sections.section-space-padding',
         'acf-sections.unmapped-layout',
+        'acf-sections.demo-sections-hero',
+        'acf-sections.demo-sections-video-showcase',
+        'acf-sections.demo-sections-capability-card',
+        'acf-sections.demo-sections-contact-cta',
+        'acf-sections.faq-hero',
+        'acf-sections.faq-list',
+        'acf-sections.faq-cta',
       ]
     >;
     publishedAt: Schema.Attribute.DateTime;
@@ -1607,9 +1708,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::author.author': ApiAuthorAuthor;
+      'api::blog.blog': ApiBlogBlog;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
       'api::category.category': ApiCategoryCategory;
       'api::comment.comment': ApiCommentComment;
+      'api::enquiry.enquiry': ApiEnquiryEnquiry;
       'api::faq.faq': ApiFaqFaq;
       'api::lead.lead': ApiLeadLead;
       'api::menu.menu': ApiMenuMenu;

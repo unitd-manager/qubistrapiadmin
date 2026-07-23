@@ -12,7 +12,9 @@
 "use strict";
 
 const FORCE = process.argv.includes("--force");
-const SLUG = "resources/blog";
+// The Page slug is a uid field and cannot contain "/". The public URL stays
+// /resources/blog (a React route); this flat slug is only the CMS identifier.
+const SLUG = "resources-blog";
 
 const pageBuilder = [
   {

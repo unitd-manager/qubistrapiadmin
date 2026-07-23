@@ -663,6 +663,135 @@ export interface AcfSectionsContentLayout extends Struct.ComponentSchema {
   };
 }
 
+export interface AcfSectionsDemoSectionsCapabilityCard
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_demo_sections_capability_cards';
+  info: {
+    displayName: 'demo-sections.capability-card';
+  };
+  attributes: {
+    card: Schema.Attribute.Component<'acf-shared.card', true>;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsDemoSectionsContactCta
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_demo_sections_contact_ctas';
+  info: {
+    displayName: 'demo-sections.contact-cta';
+  };
+  attributes: {
+    cta_label: Schema.Attribute.String;
+    cta_link: Schema.Attribute.String;
+    description: Schema.Attribute.Blocks;
+    form_fields: Schema.Attribute.Component<'acf-shared.form-fields', true>;
+    heading: Schema.Attribute.String;
+    highlighted_word: Schema.Attribute.String;
+    request_content: Schema.Attribute.String;
+    request_description: Schema.Attribute.Blocks;
+    sub_description: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsDemoSectionsHero extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_demo_sections_heroes';
+  info: {
+    displayName: 'demo-sections.hero';
+  };
+  attributes: {
+    cta_label: Schema.Attribute.String;
+    cta_link: Schema.Attribute.String;
+    description: Schema.Attribute.Blocks;
+    eyebrow_icon: Schema.Attribute.String;
+    eyebrow_text: Schema.Attribute.String;
+    heading: Schema.Attribute.String;
+    highlighted_word: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsDemoSectionsVideoShowcase
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_demo_sections_video_showcases';
+  info: {
+    displayName: 'demo-sections.video-showcase';
+  };
+  attributes: {
+    duration_label: Schema.Attribute.String;
+    thumbnail: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    video_subtitle: Schema.Attribute.String;
+    video_title: Schema.Attribute.String;
+    video_url: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsFaqCta extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_faq_ctas';
+  info: {
+    displayName: 'faq-cta';
+  };
+  attributes: {
+    description: Schema.Attribute.Blocks;
+    eyebrow_text: Schema.Attribute.String;
+    heading: Schema.Attribute.String;
+    primary_cta_label: Schema.Attribute.String;
+    primary_cta_link: Schema.Attribute.String;
+    secondary_cta_label: Schema.Attribute.String;
+    secondary_cta_link: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsFaqGroup extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_faq_groups';
+  info: {
+    displayName: 'faq-group';
+  };
+  attributes: {
+    faq: Schema.Attribute.Component<'acf-sections.faq-item', true>;
+    group_title: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsFaqHero extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_faq_heroes';
+  info: {
+    displayName: 'faq-hero';
+  };
+  attributes: {
+    description: Schema.Attribute.Blocks;
+    eyebrow_text: Schema.Attribute.String;
+    heading: Schema.Attribute.String;
+    highlighted_word: Schema.Attribute.String;
+    primary_cta_label: Schema.Attribute.String;
+    primary_cta_link: Schema.Attribute.String;
+    secondary_cta_label: Schema.Attribute.String;
+    secondary_cta_link: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsFaqItem extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_faq_items';
+  info: {
+    displayName: 'faq-item';
+  };
+  attributes: {
+    answer: Schema.Attribute.Blocks;
+    question: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSectionsFaqList extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_faq_lists';
+  info: {
+    displayName: 'faq-list';
+  };
+  attributes: {
+    groups: Schema.Attribute.Component<'acf-sections.faq-group', true>;
+    section_title: Schema.Attribute.String;
+  };
+}
+
 export interface AcfSectionsFaqSectionBlock extends Struct.ComponentSchema {
   collectionName: 'components_acf_sections_faq_section_block';
   info: {
@@ -3014,6 +3143,31 @@ export interface AcfSharedBenefitsGridLayoutFeaturesList
   };
 }
 
+export interface AcfSharedBulletPoints extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_bullet_points';
+  info: {
+    displayName: 'bullet_points';
+  };
+  attributes: {
+    content: Schema.Attribute.String;
+    simple: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedCard extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_cards';
+  info: {
+    displayName: 'card';
+  };
+  attributes: {
+    bullet_points: Schema.Attribute.Component<'acf-shared.bullet-points', true>;
+    cta_label: Schema.Attribute.String;
+    cta_link: Schema.Attribute.String;
+    duration_badge: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface AcfSharedCareerOpeningsSectionJobOpenings
   extends Struct.ComponentSchema {
   collectionName: 'components_acf_shared_career_openings_section__e4d829cd';
@@ -3143,6 +3297,23 @@ export interface AcfSharedFeaturedWebinarsMediaMediaCards
     video_link: Schema.Attribute.Component<'shared.menu-item', false> &
       Schema.Attribute.Required;
     video_thumbnail: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface AcfSharedFormFields extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_form_fields';
+  info: {
+    displayName: 'form_fields';
+  };
+  attributes: {
+    field_name: Schema.Attribute.String;
+    field_type: Schema.Attribute.Enumeration<
+      ['text', 'email', 'tel', 'textarea']
+    >;
+    is_required: Schema.Attribute.Boolean;
+    label: Schema.Attribute.String;
+    placeholder: Schema.Attribute.String;
+    width: Schema.Attribute.Enumeration<['full', 'half']>;
   };
 }
 
@@ -4554,6 +4725,15 @@ declare module '@strapi/strapi' {
       'acf-sections.content-highlight-block': AcfSectionsContentHighlightBlock;
       'acf-sections.content-image-split-block': AcfSectionsContentImageSplitBlock;
       'acf-sections.content-layout': AcfSectionsContentLayout;
+      'acf-sections.demo-sections-capability-card': AcfSectionsDemoSectionsCapabilityCard;
+      'acf-sections.demo-sections-contact-cta': AcfSectionsDemoSectionsContactCta;
+      'acf-sections.demo-sections-hero': AcfSectionsDemoSectionsHero;
+      'acf-sections.demo-sections-video-showcase': AcfSectionsDemoSectionsVideoShowcase;
+      'acf-sections.faq-cta': AcfSectionsFaqCta;
+      'acf-sections.faq-group': AcfSectionsFaqGroup;
+      'acf-sections.faq-hero': AcfSectionsFaqHero;
+      'acf-sections.faq-item': AcfSectionsFaqItem;
+      'acf-sections.faq-list': AcfSectionsFaqList;
       'acf-sections.faq-section-block': AcfSectionsFaqSectionBlock;
       'acf-sections.feature-highlight-block': AcfSectionsFeatureHighlightBlock;
       'acf-sections.featured-webinars-media': AcfSectionsFeaturedWebinarsMedia;
@@ -4661,6 +4841,8 @@ declare module '@strapi/strapi' {
       'acf-shared.banner-layout-banner-two-images': AcfSharedBannerLayoutBannerTwoImages;
       'acf-shared.benefits-grid-layout-features': AcfSharedBenefitsGridLayoutFeatures;
       'acf-shared.benefits-grid-layout-features-list': AcfSharedBenefitsGridLayoutFeaturesList;
+      'acf-shared.bullet-points': AcfSharedBulletPoints;
+      'acf-shared.card': AcfSharedCard;
       'acf-shared.career-openings-section-job-openings': AcfSharedCareerOpeningsSectionJobOpenings;
       'acf-shared.career-openings-section-job-openings-job-section': AcfSharedCareerOpeningsSectionJobOpeningsJobSection;
       'acf-shared.collaborations-section-achievement-boxes': AcfSharedCollaborationsSectionAchievementBoxes;
@@ -4669,6 +4851,7 @@ declare module '@strapi/strapi' {
       'acf-shared.contact-location-section-locations': AcfSharedContactLocationSectionLocations;
       'acf-shared.faq-section-block-faq-question-and-answer': AcfSharedFaqSectionBlockFaqQuestionAndAnswer;
       'acf-shared.featured-webinars-media-media-cards': AcfSharedFeaturedWebinarsMediaMediaCards;
+      'acf-shared.form-fields': AcfSharedFormFields;
       'acf-shared.form-with-contact-info-contact-details': AcfSharedFormWithContactInfoContactDetails;
       'acf-shared.form-with-contact-info-social-media-link': AcfSharedFormWithContactInfoSocialMediaLink;
       'acf-shared.grid-layout-grid-items': AcfSharedGridLayoutGridItems;

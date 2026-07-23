@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_acf_sections_faq_heroes",
+  "info": {
+    "displayName": "faq-hero"
+  },
+  "options": {},
+  "attributes": {
+    "eyebrow_text": {
+      "type": "string"
+    },
+    "heading": {
+      "type": "string"
+    },
+    "highlighted_word": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "primary_cta_label": {
+      "type": "string"
+    },
+    "primary_cta_link": {
+      "type": "string"
+    },
+    "secondary_cta_label": {
+      "type": "string"
+    },
+    "secondary_cta_link": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
