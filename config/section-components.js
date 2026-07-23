@@ -134,6 +134,19 @@ const QUBI_COMPONENTS = [
   "acf-sections.qubi-subscribe-cta-section",
 ];
 
+// Solutions family: Use Cases page + Industries page pageBuilder blocks.
+const SOLUTIONS_COMPONENTS = [
+  "acf-sections.solutions-hero-banner",
+  "acf-sections.solutions-stats-band",
+  "acf-sections.solutions-use-cases-layout",
+  "acf-sections.solutions-industry-layout",
+  "acf-sections.solutions-execution-flow",
+  "acf-sections.solutions-final-cta",
+  "acf-sections.solutions-comparison-block",
+  "acf-sections.solutions-problems-block",
+  "acf-sections.solutions-what-we-do",
+];
+
 const PAGE_BUILDER_COMPONENTS = [
   ...HOME_COMPONENTS,
   ...COMMON_COMPONENTS,
@@ -143,6 +156,7 @@ const PAGE_BUILDER_COMPONENTS = [
   ...TEAM_CAREER_COMPONENTS,
   ...SHARED_FEATURE_COMPONENTS,
   ...QUBI_COMPONENTS,
+  ...SOLUTIONS_COMPONENTS,
 ];
 
 const LANDING_SECTION_COMPONENTS = [
@@ -150,6 +164,7 @@ const LANDING_SECTION_COMPONENTS = [
   ...COMMON_COMPONENTS,
   ...SHARED_FEATURE_COMPONENTS,
   ...QUBI_COMPONENTS,
+  ...SOLUTIONS_COMPONENTS,
 ];
 
 const BLOG_SECTION_COMPONENTS = [

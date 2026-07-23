@@ -162,6 +162,50 @@ export default factories.createCoreController('api::page.page', ({ strapi }) => 
                 button: { populate: '*' },
               },
             },
+            'acf-sections.solutions-hero-banner': {
+              populate: '*',
+            },
+            'acf-sections.solutions-stats-band': {
+              populate: {
+                stats: { populate: '*' },
+              },
+            },
+            'acf-sections.solutions-use-cases-layout': {
+              populate: {
+                useCases: {
+                  populate: {
+                    stats: { populate: '*' },
+                  },
+                },
+              },
+            },
+            'acf-sections.solutions-industry-layout': {
+              populate: {
+                industry_cards: {
+                  populate: {
+                    highlights: { populate: '*' },
+                  },
+                },
+              },
+            },
+            'acf-sections.solutions-execution-flow': {
+              populate: {
+                steps: { populate: '*' },
+                verbs: { populate: '*' },
+              },
+            },
+            'acf-sections.solutions-final-cta': {
+              populate: '*',
+            },
+            'acf-sections.solutions-comparison-block': {
+              populate: '*',
+            },
+            'acf-sections.solutions-problems-block': {
+              populate: '*',
+            },
+            'acf-sections.solutions-what-we-do': {
+              populate: '*',
+            },
           },
         },
       },
