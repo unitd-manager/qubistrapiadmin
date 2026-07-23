@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "menu_items",
+  "info": {
+    "displayName": "Menu Item",
+    "singularName": "menu-item",
+    "pluralName": "menu-items",
+    "description": "A link in the site header or footer. Top-level header items with children render as dropdowns. Fully client-managed."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string"
+    },
+    "location": {
+      "type": "enumeration",
+      "enum": ["header", "footer"],
+      "default": "header",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "open_in_new_tab": {
+      "type": "boolean",
+      "default": false
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::menu-item.menu-item",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::menu-item.menu-item",
+      "mappedBy": "parent"
+    }
+  }
+}

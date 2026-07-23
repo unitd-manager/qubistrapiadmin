@@ -61,6 +61,12 @@
       "multiple": true,
       "required": false,
       "allowedTypes": ["images"]
+    },
+    "blog_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::blog-category.blog-category",
+      "inversedBy": "blogs"
     }
   }
 }
