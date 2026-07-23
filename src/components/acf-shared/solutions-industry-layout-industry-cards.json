@@ -4,7 +4,7 @@
     "displayName": "Solutions Industry Card"
   },
   "attributes": {
-    "icon": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+   "icon": { "type": "string" },
     "categoryLabel": { "type": "string" },
     "title": { "type": "string" },
     "description": { "type": "text" },

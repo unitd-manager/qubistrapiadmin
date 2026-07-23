@@ -2309,11 +2309,17 @@ export interface AcfSectionsSolutionsExecutionFlow
     icon: 'layout';
   };
   attributes: {
+    description: Schema.Attribute.Text;
     eyebrowLabel: Schema.Attribute.String;
     heading: Schema.Attribute.String;
     highlightedHeading: Schema.Attribute.String;
     steps: Schema.Attribute.Component<
       'acf-shared.solutions-execution-flow-step',
+      true
+    >;
+    tagline: Schema.Attribute.String;
+    verbs: Schema.Attribute.Component<
+      'acf-shared.solutions-execution-flow-verb',
       true
     >;
   };
@@ -2471,6 +2477,29 @@ export interface AcfSectionsSolutionsUseCasesLayout
     highlightedHeading: Schema.Attribute.String;
     useCases: Schema.Attribute.Component<
       'acf-shared.solutions-use-cases-layout-items',
+      true
+    >;
+  };
+}
+
+export interface AcfSectionsSolutionsWhatWeDo extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_solutions_what_we_do';
+  info: {
+    displayName: 'Solutions - What We Do';
+    icon: 'brain';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<
+      'acf-shared.solutions-what-we-do-card',
+      true
+    >;
+    description: Schema.Attribute.Text;
+    eyebrowLabel: Schema.Attribute.String;
+    heading: Schema.Attribute.String;
+    highlightedHeading: Schema.Attribute.String;
+    tagline: Schema.Attribute.String;
+    verbs: Schema.Attribute.Component<
+      'acf-shared.solutions-what-we-do-verb',
       true
     >;
   };
@@ -4074,7 +4103,7 @@ export interface AcfSharedSolutionsIndustryLayoutIndustryCards
       'acf-shared.solutions-industry-layout-highlight-item',
       true
     >;
-    icon: Schema.Attribute.Media<'images'>;
+    icon: Schema.Attribute.String;
     title: Schema.Attribute.String;
   };
 }
@@ -4140,6 +4169,29 @@ export interface AcfSharedSolutionsUseCasesLayoutStatItem
   };
   attributes: {
     text: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedSolutionsWhatWeDoCard extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_what_we_do_cards';
+  info: {
+    displayName: 'Solutions What We Do Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface AcfSharedSolutionsWhatWeDoVerb extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_solutions_what_we_do_verbs';
+  info: {
+    displayName: 'Solutions What We Do Verb';
+  };
+  attributes: {
+    detail: Schema.Attribute.Text;
+    verb: Schema.Attribute.String;
   };
 }
 
@@ -4580,6 +4632,7 @@ declare module '@strapi/strapi' {
       'acf-sections.solutions-problems-block': AcfSectionsSolutionsProblemsBlock;
       'acf-sections.solutions-stats-band': AcfSectionsSolutionsStatsBand;
       'acf-sections.solutions-use-cases-layout': AcfSectionsSolutionsUseCasesLayout;
+      'acf-sections.solutions-what-we-do': AcfSectionsSolutionsWhatWeDo;
       'acf-sections.spacing': AcfSectionsSpacing;
       'acf-sections.step-cards-section': AcfSectionsStepCardsSection;
       'acf-sections.team-highlight-block': AcfSectionsTeamHighlightBlock;
@@ -4690,6 +4743,8 @@ declare module '@strapi/strapi' {
       'acf-shared.solutions-stats-band-item': AcfSharedSolutionsStatsBandItem;
       'acf-shared.solutions-use-cases-layout-items': AcfSharedSolutionsUseCasesLayoutItems;
       'acf-shared.solutions-use-cases-layout-stat-item': AcfSharedSolutionsUseCasesLayoutStatItem;
+      'acf-shared.solutions-what-we-do-card': AcfSharedSolutionsWhatWeDoCard;
+      'acf-shared.solutions-what-we-do-verb': AcfSharedSolutionsWhatWeDoVerb;
       'acf-shared.step-cards-section-steps': AcfSharedStepCardsSectionSteps;
       'acf-shared.step-cards-section-steps-list': AcfSharedStepCardsSectionStepsList;
       'acf-shared.text-table-block-table': AcfSharedTextTableBlockTable;

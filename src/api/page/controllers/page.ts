@@ -183,7 +183,6 @@ export default factories.createCoreController('api::page.page', ({ strapi }) => 
               populate: {
                 industry_cards: {
                   populate: {
-                    icon: true,
                     highlights: { populate: '*' },
                   },
                 },
@@ -191,23 +190,21 @@ export default factories.createCoreController('api::page.page', ({ strapi }) => 
             },
             'acf-sections.solutions-execution-flow': {
               populate: {
-                verbs: { populate: '*' },
                 steps: { populate: '*' },
+                verbs: { populate: '*' },
               },
             },
             'acf-sections.solutions-final-cta': {
               populate: '*',
             },
             'acf-sections.solutions-comparison-block': {
-              populate: {
-                othersItems: { populate: '*' },
-                qubiItems: { populate: '*' },
-              },
+              populate: '*',
             },
             'acf-sections.solutions-problems-block': {
-              populate: {
-                problems: { populate: '*' },
-              },
+              populate: '*',
+            },
+            'acf-sections.solutions-what-we-do': {
+              populate: '*',
             },
           },
         },

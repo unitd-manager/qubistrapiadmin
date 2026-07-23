@@ -1,4 +1,4 @@
-﻿{
+{
   "kind": "collectionType",
   "collectionName": "pages",
   "info": {
@@ -127,14 +127,6 @@
         "acf-sections.step-cards-section",
         "acf-sections.solution-hero-banner-with-cta",
         "acf-sections.solutions-feature-block",
-        "acf-sections.solutions-hero-banner",
-        "acf-sections.solutions-stats-band",
-        "acf-sections.solutions-use-cases-layout",
-        "acf-sections.solutions-industry-layout",
-        "acf-sections.solutions-execution-flow",
-        "acf-sections.solutions-final-cta",
-        "acf-sections.solutions-comparison-block",
-        "acf-sections.solutions-problems-block",
         "acf-sections.healthcare-automation-solutions",
         "acf-sections.collaborations-section",
         "acf-sections.partner-highlight-section",
@@ -188,7 +180,16 @@
         "acf-sections.qubi-comparison-section",
         "acf-sections.qubi-faq-section",
         "acf-sections.qubi-blog-list-section",
-        "acf-sections.qubi-subscribe-cta-section"
+        "acf-sections.qubi-subscribe-cta-section",
+        "acf-sections.solutions-hero-banner",
+        "acf-sections.solutions-stats-band",
+        "acf-sections.solutions-use-cases-layout",
+        "acf-sections.solutions-industry-layout",
+        "acf-sections.solutions-execution-flow",
+        "acf-sections.solutions-final-cta",
+        "acf-sections.solutions-comparison-block",
+        "acf-sections.solutions-problems-block",
+        "acf-sections.solutions-what-we-do"
       ]
     }
   }
