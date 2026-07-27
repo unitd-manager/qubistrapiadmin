@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -41,10 +42,13 @@ jobs:
             ./ \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PATH }}/
 
-      - name: Install Dependencies & Build
+      - name: Create production env and Build
         run: |
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
             cd ${{ secrets.SERVER_PATH }}
+
+            echo "VITE_STRAPI_URL=https://qubistrapiadmin.unitdtechnologies.com" > .env
+            echo "VITE_APP_URL=https://qubistrapidev.unitdtechnologies.com" >> .env
 
             echo "Installing dependencies..."
             npm install
