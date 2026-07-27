@@ -1,4 +1,4 @@
-name: Deploy React Vite to aaPanel
+name: Deploy Strapi to aaPanel
 
 on:
   push:
@@ -8,24 +8,11 @@ on:
 jobs:
   deploy:
     if: github.actor == 'Muthumari-1993'
-
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Build Project
-        run: npm run build
 
       - name: Configure SSH
         run: |
@@ -34,13 +21,27 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to aaPanel
+      - name: Deploy Source Code
         run: |
           rsync -avz --delete \
-            --exclude='.user.ini' \
-            --exclude='.htaccess' \
-            --exclude='404.html' \
-            --exclude='502.html' \
-            --exclude='.well-known' \
-            dist/ \
+            --exclude=".git" \
+            --exclude=".github" \
+            --exclude=".env" \
+            ./ \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PATH }}/
+
+      - name: Build & Restart Strapi
+        run: |
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd ${{ secrets.SERVER_PATH }}
+            npm install
+            npm run build
+
+            if pm2 describe qubistrapiadmin > /dev/null; then
+              pm2 restart qubistrapiadmin
+            else
+              pm2 start npm --name qubistrapiadmin -- run start
+            fi
+
+            pm2 save
+          EOF
