@@ -1,0 +1,54 @@
+name: Deploy Strapi to aaPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.actor == 'Muthumari-1993'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy Source Code
+        run: |
+          rsync -avz --delete \
+            --exclude=".git" \
+            --exclude=".github" \
+            --exclude=".env" \
+            --exclude=".user.ini" \
+            --exclude=".htaccess" \
+            --exclude="404.html" \
+            --exclude="502.html" \
+            --exclude=".well-known" \
+            ./ \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PATH }}/
+
+      - name: Install Dependencies & Build
+        run: |
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
+            cd ${{ secrets.SERVER_PATH }}
+
+            echo "Installing dependencies..."
+            npm install
+
+            echo "Building Strapi..."
+            npm run build
+          EOF
