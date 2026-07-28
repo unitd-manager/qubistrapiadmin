@@ -10,6 +10,7 @@ const HOME_COMPONENTS = [
   "acf-sections.home-award-winner",
   "acf-sections.home-partner",
   "acf-sections.home-blog-post",
+  "acf-sections.footer",
 ];
 
 const COMMON_COMPONENTS = [
