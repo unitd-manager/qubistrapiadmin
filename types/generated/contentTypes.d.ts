@@ -1007,6 +1007,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'acf-sections.solutions-comparison-block',
         'acf-sections.solutions-problems-block',
         'acf-sections.solutions-what-we-do',
+        'acf-sections.footer',
       ]
     >;
     pageType: Schema.Attribute.Enumeration<

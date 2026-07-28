@@ -855,6 +855,16 @@ export interface AcfSectionsFeaturedWebinarsMedia
   };
 }
 
+export interface AcfSectionsFooter extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_footers';
+  info: {
+    displayName: 'footer';
+  };
+  attributes: {
+    copyright_text: Schema.Attribute.String;
+  };
+}
+
 export interface AcfSectionsFooterCommonCta extends Struct.ComponentSchema {
   collectionName: 'components_acf_sections_footer_common_cta';
   info: {
@@ -4737,6 +4747,7 @@ declare module '@strapi/strapi' {
       'acf-sections.faq-section-block': AcfSectionsFaqSectionBlock;
       'acf-sections.feature-highlight-block': AcfSectionsFeatureHighlightBlock;
       'acf-sections.featured-webinars-media': AcfSectionsFeaturedWebinarsMedia;
+      'acf-sections.footer': AcfSectionsFooter;
       'acf-sections.footer-common-cta': AcfSectionsFooterCommonCta;
       'acf-sections.form-with-contact-info': AcfSectionsFormWithContactInfo;
       'acf-sections.general-cta-section': AcfSectionsGeneralCtaSection;
