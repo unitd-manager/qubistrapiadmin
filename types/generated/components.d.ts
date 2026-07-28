@@ -4666,6 +4666,20 @@ export interface SharedMenuItem extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedNavParent extends Struct.ComponentSchema {
+  collectionName: 'components_shared_nav_parents';
+  info: {
+    displayName: 'nav-parent';
+    icon: 'bulletList';
+  };
+  attributes: {
+    children: Schema.Attribute.Component<'shared.menu-item', true>;
+    label: Schema.Attribute.String;
+    publish: Schema.Attribute.Boolean;
+    url: Schema.Attribute.String;
+  };
+}
+
 export interface SharedSeo extends Struct.ComponentSchema {
   collectionName: 'components_shared_seos';
   info: {
@@ -4949,6 +4963,7 @@ declare module '@strapi/strapi' {
       'sections.hero': SectionsHero;
       'sections.testimonial-section': SectionsTestimonialSection;
       'shared.menu-item': SharedMenuItem;
+      'shared.nav-parent': SharedNavParent;
       'shared.seo': SharedSeo;
       'shared.social-link': SharedSocialLink;
     }

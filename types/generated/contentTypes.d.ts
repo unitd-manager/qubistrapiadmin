@@ -762,6 +762,39 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiHeaderHeader extends Struct.SingleTypeSchema {
+  collectionName: 'headers';
+  info: {
+    description: 'The whole site header in one place: logo, nav links, and CTA button.';
+    displayName: 'Header';
+    pluralName: 'headers';
+    singularName: 'header';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    cta_label: Schema.Attribute.String;
+    cta_url: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::header.header'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images'>;
+    logo_link: Schema.Attribute.String;
+    nav_links: Schema.Attribute.Component<'shared.nav-parent', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiLeadLead extends Struct.CollectionTypeSchema {
   collectionName: 'leads';
   info: {
@@ -1856,6 +1889,7 @@ declare module '@strapi/strapi' {
       'api::enquiry.enquiry': ApiEnquiryEnquiry;
       'api::faq.faq': ApiFaqFaq;
       'api::footer.footer': ApiFooterFooter;
+      'api::header.header': ApiHeaderHeader;
       'api::lead.lead': ApiLeadLead;
       'api::menu-item.menu-item': ApiMenuItemMenuItem;
       'api::menu.menu': ApiMenuMenu;
