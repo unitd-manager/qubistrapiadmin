@@ -3173,6 +3173,7 @@ export interface AcfSharedCard extends Struct.ComponentSchema {
     bullet_points: Schema.Attribute.Component<'acf-shared.bullet-points', true>;
     cta_label: Schema.Attribute.String;
     cta_link: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
     duration_badge: Schema.Attribute.String;
     title: Schema.Attribute.String;
   };

@@ -930,6 +930,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'acf-sections.home-award-winner',
         'acf-sections.home-partner',
         'acf-sections.home-blog-post',
+        'acf-sections.footer',
         'acf-sections.common-cta',
         'acf-sections.footer-common-cta',
         'acf-sections.text-image-cta-section',
@@ -1040,7 +1041,6 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'acf-sections.solutions-comparison-block',
         'acf-sections.solutions-problems-block',
         'acf-sections.solutions-what-we-do',
-        'acf-sections.footer',
       ]
     >;
     pageType: Schema.Attribute.Enumeration<

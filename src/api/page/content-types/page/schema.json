@@ -6,11 +6,65 @@
     "singularName": "page",
     "pluralName": "pages"
   },
-  "options": {
-    "draftAndPublish": false
-  },
-  "pluginOptions": {},
   "attributes": {
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        }
+      }
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        }
+      }
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    },
+    "pageType": {
+      "type": "enumeration",
+      "enum": [
+        "landing",
+        "blog",
+        "about",
+        "service",
+        "career",
+        "resource"
+      ],
+      "default": "landing",
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        }
+      }
+    },
+    "showInNav": {
+      "type": "boolean",
+      "default": true
+    },
+    "navLabel": {
+      "type": "string"
+    },
+    "navOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "acf": {
+      "type": "json",
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        }
+      }
+    },
     "pageBuilder": {
       "type": "dynamiczone",
       "configurable": false,
@@ -26,6 +80,7 @@
         "acf-sections.home-award-winner",
         "acf-sections.home-partner",
         "acf-sections.home-blog-post",
+        "acf-sections.footer",
         "acf-sections.common-cta",
         "acf-sections.footer-common-cta",
         "acf-sections.text-image-cta-section",
@@ -135,67 +190,8 @@
         "acf-sections.solutions-final-cta",
         "acf-sections.solutions-comparison-block",
         "acf-sections.solutions-problems-block",
-        "acf-sections.solutions-what-we-do",
-        "acf-sections.footer"
+        "acf-sections.solutions-what-we-do"
       ]
-    },
-    "title": {
-      "type": "string",
-      "pluginOptions": {
-        "content-manager": {
-          "visible": false
-        }
-      }
-    },
-    "slug": {
-      "type": "uid",
-      "pluginOptions": {
-        "content-manager": {
-          "visible": false
-        }
-      },
-      "targetField": "title"
-    },
-    "seo": {
-      "type": "component",
-      "component": "shared.seo",
-      "repeatable": false
-    },
-    "pageType": {
-      "type": "enumeration",
-      "pluginOptions": {
-        "content-manager": {
-          "visible": false
-        }
-      },
-      "default": "landing",
-      "enum": [
-        "landing",
-        "blog",
-        "about",
-        "service",
-        "career",
-        "resource"
-      ]
-    },
-    "showInNav": {
-      "type": "boolean",
-      "default": true
-    },
-    "navLabel": {
-      "type": "string"
-    },
-    "navOrder": {
-      "type": "integer",
-      "default": 0
-    },
-    "acf": {
-      "type": "json",
-      "pluginOptions": {
-        "content-manager": {
-          "visible": false
-        }
-      }
     }
   }
 }
