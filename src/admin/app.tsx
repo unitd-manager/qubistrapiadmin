@@ -7,6 +7,7 @@ import type {
 
 import WordPressPostsIcon from './components/WordPressPostsIcon';
 import WordPressPostsTable from './components/WordPressPostsTable';
+import SeoScorePanel from './extensions/seo-score-panel/SeoScorePanel'; // ★ ADDED
 
 const PLUGIN_ID = 'qbo-wordpress-posts';
 
@@ -46,10 +47,11 @@ export default {
         id: `${PLUGIN_ID}.plugin.name`,
         defaultMessage: 'WordPress Posts',
       },
-      Component: async () => {
-        const component = await import('./pages/WordPressPostsPage');
-        return component.default;
-      },
+      // ★ FIXED — return the import() promise directly instead of
+      // awaiting it and returning `.default` manually. Strapi's
+      // addMenuLink expects Component: () => Promise<{ default: ComponentType }>,
+      // and TS was rejecting the async/await/return-.default version.
+      Component: () => import('./pages/WordPressPostsPage'),
       permissions: [],
       position: 20,
     });
@@ -64,6 +66,6 @@ export default {
     const apis = app.getPlugin('content-manager')
       .apis as ContentManagerPlugin['config']['apis'];
 
-    apis.addEditViewSidePanel([WordPressPostsPanel]);
+    apis.addEditViewSidePanel([WordPressPostsPanel, SeoScorePanel]); // ★ CHANGED
   },
 };

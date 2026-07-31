@@ -7,7 +7,11 @@ const config: Core.Config.Middlewares = [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['http://localhost:8080'],
+      origin: [
+        'http://localhost:8080',
+        'http://localhost:8098',
+        'https://qubistrapidev.unitdtechnologies.com',
+      ],
       headers: '*',
       credentials: true,
     },

@@ -542,6 +542,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     modification_date: Schema.Attribute.DateTime;
     published: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -892,6 +893,37 @@ export interface ApiMenuMenu extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiNotFoundLogNotFoundLog extends Struct.CollectionTypeSchema {
+  collectionName: 'not_found_logs';
+  info: {
+    description: 'Tracks every URL that hit a 404, with a hit counter, so broken links can be found and redirected.';
+    displayName: 'Not Found Log';
+    pluralName: 'not-found-logs';
+    singularName: 'not-found-log';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    hits: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    lastSeenAt: Schema.Attribute.DateTime;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::not-found-log.not-found-log'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ApiPagePage extends Struct.CollectionTypeSchema {
   collectionName: 'pages';
   info: {
@@ -1125,16 +1157,21 @@ export interface ApiRedirectRedirect extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    from: Schema.Attribute.String & Schema.Attribute.Required;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::redirect.redirect'
     > &
       Schema.Attribute.Private;
-    newUrl: Schema.Attribute.String;
-    oldUrl: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    statusCode: Schema.Attribute.Integer;
+    to: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<
+      ['permanent_301', 'temporary_302', 'temporary_307']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'permanent_301'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1165,6 +1202,8 @@ export interface ApiResourcePageResourcePage
       'api::resource-page.resource-page'
     > &
       Schema.Attribute.Private;
+    navLabel: Schema.Attribute.String;
+    navOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     pageBuilder: Schema.Attribute.DynamicZone<
       [
         'sections.hero',
@@ -1199,7 +1238,13 @@ export interface ApiResourcePageResourcePage
         'acf-sections.faq-cta',
       ]
     >;
+    pageType: Schema.Attribute.Enumeration<
+      ['landing', 'blog', 'about', 'service', 'career', 'resource']
+    > &
+      Schema.Attribute.DefaultTo<'resource'>;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    showInNav: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -1894,6 +1939,7 @@ declare module '@strapi/strapi' {
       'api::lead.lead': ApiLeadLead;
       'api::menu-item.menu-item': ApiMenuItemMenuItem;
       'api::menu.menu': ApiMenuMenu;
+      'api::not-found-log.not-found-log': ApiNotFoundLogNotFoundLog;
       'api::page.page': ApiPagePage;
       'api::post.post': ApiPostPost;
       'api::redirect.redirect': ApiRedirectRedirect;

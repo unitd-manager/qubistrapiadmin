@@ -4697,14 +4697,23 @@ export interface SharedSeo extends Struct.ComponentSchema {
     displayName: 'SEO';
   };
   attributes: {
-    canonicalUrl: Schema.Attribute.String;
-    contentAiScore: Schema.Attribute.String;
+    canonicalURL: Schema.Attribute.String;
+    focusKeyword: Schema.Attribute.String;
     keywords: Schema.Attribute.String;
     metaDescription: Schema.Attribute.Text;
+    metaImage: Schema.Attribute.Media<'images'>;
     metaTitle: Schema.Attribute.String;
-    noIndex: Schema.Attribute.Boolean;
-    ogImage: Schema.Attribute.Media;
-    seoScore: Schema.Attribute.String;
+    noIndex: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    ogDescription: Schema.Attribute.Text;
+    ogImage: Schema.Attribute.Media<'images'>;
+    ogTitle: Schema.Attribute.String;
+    schema: Schema.Attribute.JSON;
+    seoAnalysis: Schema.Attribute.JSON;
+    seoScore: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    twitterCard: Schema.Attribute.Enumeration<
+      ['summary', 'summary_large_image']
+    > &
+      Schema.Attribute.DefaultTo<'summary_large_image'>;
   };
 }
 

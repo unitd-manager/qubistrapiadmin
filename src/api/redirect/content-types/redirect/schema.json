@@ -6,15 +6,28 @@
     "singularName": "redirect",
     "pluralName": "redirects"
   },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
   "attributes": {
-    "oldUrl": {
-      "type": "string"
+    "from": {
+      "type": "string",
+      "required": true
     },
-    "newUrl": {
-      "type": "string"
+    "to": {
+      "type": "string",
+      "required": true
     },
-    "statusCode": {
-      "type": "integer"
+    "type": {
+      "type": "enumeration",
+      "enum": ["permanent_301", "temporary_302", "temporary_307"],
+      "default": "permanent_301",
+      "required": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

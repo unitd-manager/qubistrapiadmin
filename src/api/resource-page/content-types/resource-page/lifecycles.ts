@@ -1,9 +1,8 @@
 import crypto from 'node:crypto';
 import { analyzeSeo, computeSeoScore } from '../../../../utils/seo-scoring'; // ★ ADDED
 
-const PAGE_TYPES = ['landing', 'blog', 'about', 'service', 'career', 'resource'] as const;
-const PAGE_DOCUMENT_PATH_REGEX =
-  /^\/content-manager\/collection-types\/api::page\.page\/([^/?#]+)\/?$/;
+const RESOURCE_PAGE_DOCUMENT_PATH_REGEX =
+  /^\/content-manager\/collection-types\/api::resource-page\.resource-page\/([^/?#]+)\/?$/;
 const PAGE_BUILDER_HASH_ACF_KEY = '_pageBuilderHash';
 const OMITTED_HASH_KEYS = new Set([
   'id',
@@ -19,19 +18,14 @@ const OMITTED_HASH_KEYS = new Set([
   'localizations',
 ]);
 
-type PageType = (typeof PAGE_TYPES)[number];
-type PageEntry = Record<string, unknown>;
+type ResourcePageEntry = Record<string, unknown>;
 type DynamicZoneComponent = Record<string, unknown> & { __component?: unknown };
 
-function pageSupportsAcf() {
-  return Boolean(strapi.contentType('api::page.page')?.attributes?.acf);
+function resourcePageSupportsAcf() {
+  return Boolean(strapi.contentType('api::resource-page.resource-page')?.attributes?.acf);
 }
 
-function isPageType(value: unknown): value is PageType {
-  return typeof value === 'string' && PAGE_TYPES.includes(value as PageType);
-}
-
-function isPlainObject(value: unknown): value is PageEntry {
+function isPlainObject(value: unknown): value is ResourcePageEntry {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 }
 
@@ -83,7 +77,7 @@ function getRequestDocumentId() {
     return null;
   }
 
-  return requestPath.match(PAGE_DOCUMENT_PATH_REGEX)?.[1] || null;
+  return requestPath.match(RESOURCE_PAGE_DOCUMENT_PATH_REGEX)?.[1] || null;
 }
 
 function mergeAcfWithPageBuilderHash(existingAcf: unknown, nextAcf: unknown, hash: string) {
@@ -94,8 +88,8 @@ function mergeAcfWithPageBuilderHash(existingAcf: unknown, nextAcf: unknown, has
   };
 }
 
-async function getCurrentPageState(documentId: string | null) {
-  if (!pageSupportsAcf()) {
+async function getCurrentResourcePageState(documentId: string | null) {
+  if (!resourcePageSupportsAcf()) {
     return null;
   }
 
@@ -103,21 +97,21 @@ async function getCurrentPageState(documentId: string | null) {
     return null;
   }
 
-  const pageRow = await strapi.db
-    .connection('pages')
+  const resourcePageRow = await strapi.db
+    .connection('resource_pages')
     .select(['id', 'document_id', 'acf'])
     .where('document_id', documentId)
     .first();
 
-  if (!pageRow) {
+  if (!resourcePageRow) {
     return null;
   }
 
-  const acf = tryParseJsonObject(pageRow.acf) ?? {};
+  const acf = tryParseJsonObject(resourcePageRow.acf) ?? {};
 
   return {
-    id: pageRow.id,
-    documentId: pageRow.document_id,
+    id: resourcePageRow.id,
+    documentId: resourcePageRow.document_id,
     acf,
     pageBuilderHash:
       typeof acf[PAGE_BUILDER_HASH_ACF_KEY] === 'string'
@@ -126,7 +120,7 @@ async function getCurrentPageState(documentId: string | null) {
   };
 }
 
-async function optimizeUnchangedPageBuilderUpdate(entry: PageEntry) {
+async function optimizeUnchangedPageBuilderUpdate(entry: ResourcePageEntry) {
   if (!Object.prototype.hasOwnProperty.call(entry, 'pageBuilder')) {
     return;
   }
@@ -137,43 +131,34 @@ async function optimizeUnchangedPageBuilderUpdate(entry: PageEntry) {
   }
 
   const documentId = getRequestDocumentId();
-  const currentPageState = await getCurrentPageState(documentId);
+  const currentResourcePageState = await getCurrentResourcePageState(documentId);
   const incomingHash = computePageBuilderHash(incomingPageBuilder);
 
-  if (!pageSupportsAcf()) {
+  if (!resourcePageSupportsAcf()) {
     return;
   }
 
-  if (currentPageState?.pageBuilderHash && currentPageState.pageBuilderHash === incomingHash) {
+  if (
+    currentResourcePageState?.pageBuilderHash &&
+    currentResourcePageState.pageBuilderHash === incomingHash
+  ) {
     delete entry.pageBuilder;
 
     if (Object.prototype.hasOwnProperty.call(entry, 'acf')) {
-      entry.acf = mergeAcfWithPageBuilderHash(currentPageState.acf, entry.acf, incomingHash);
+      entry.acf = mergeAcfWithPageBuilderHash(
+        currentResourcePageState.acf,
+        entry.acf,
+        incomingHash
+      );
     }
 
     strapi.log.info(
-      `[page-save-skip-builder] documentId=${documentId} reason=unchanged-pageBuilder`
+      `[resource-page-save-skip-builder] documentId=${documentId} reason=unchanged-pageBuilder`
     );
     return;
   }
 
-  entry.acf = mergeAcfWithPageBuilderHash(currentPageState?.acf, entry.acf, incomingHash);
-}
-
-function ensurePageType(entry: PageEntry) {
-  if (!isPageType(entry.pageType)) {
-    entry.pageType = 'landing';
-  }
-}
-
-function normalizePageTypeForUpdate(entry: PageEntry) {
-  if (!Object.prototype.hasOwnProperty.call(entry, 'pageType')) {
-    return;
-  }
-
-  if (!isPageType(entry.pageType)) {
-    delete entry.pageType;
-  }
+  entry.acf = mergeAcfWithPageBuilderHash(currentResourcePageState?.acf, entry.acf, incomingHash);
 }
 
 function parseJsonArray(value: string) {
@@ -223,7 +208,7 @@ function normalizeSelectPostTypeValue(value: unknown) {
   return undefined;
 }
 
-function normalizeObjectSelectPostType(entry: PageEntry) {
+function normalizeObjectSelectPostType(entry: ResourcePageEntry) {
   if (!Object.prototype.hasOwnProperty.call(entry, 'select_post_type')) {
     return;
   }
@@ -253,13 +238,13 @@ function normalizeSelectPostTypeDeep(value: unknown) {
   Object.values(value).forEach((item) => normalizeSelectPostTypeDeep(item));
 }
 
-function normalizeDynamicZones(entry: PageEntry) {
+function normalizeDynamicZones(entry: ResourcePageEntry) {
   normalizeSelectPostTypeDeep(entry);
 }
 
 // ★ ADDED — computes seoScore + seoAnalysis and merges both into the
 // seo component without touching any other seo sub-fields.
-function applySeoScore(entry: PageEntry) {
+function applySeoScore(entry: ResourcePageEntry) {
   const analysis = analyzeSeo({
     title: entry.title as string | undefined,
     slug: entry.slug as string | undefined,
@@ -278,11 +263,10 @@ function applySeoScore(entry: PageEntry) {
 export default {
   beforeCreate(event: { params?: { data?: unknown } }) {
     if (isPlainObject(event.params?.data)) {
-      ensurePageType(event.params.data);
       normalizeDynamicZones(event.params.data);
       applySeoScore(event.params.data); // ★ ADDED
 
-      if (pageSupportsAcf() && Array.isArray(event.params.data.pageBuilder)) {
+      if (resourcePageSupportsAcf() && Array.isArray(event.params.data.pageBuilder)) {
         event.params.data.acf = mergeAcfWithPageBuilderHash(
           event.params.data.acf,
           event.params.data.acf,
@@ -294,31 +278,9 @@ export default {
 
   async beforeUpdate(event: { params?: { data?: unknown } }) {
     if (isPlainObject(event.params?.data)) {
-      normalizePageTypeForUpdate(event.params.data);
       normalizeDynamicZones(event.params.data);
       applySeoScore(event.params.data); // ★ ADDED
       await optimizeUnchangedPageBuilderUpdate(event.params.data);
-    }
-  },
-
-  afterFindOne(event: { result?: unknown }) {
-    if (isPlainObject(event.result)) {
-      ensurePageType(event.result);
-    }
-  },
-
-  afterFindMany(event: { result?: unknown }) {
-    if (Array.isArray(event.result)) {
-      event.result.forEach((entry) => {
-        if (isPlainObject(entry)) {
-          ensurePageType(entry);
-        }
-      });
-      return;
-    }
-
-    if (isPlainObject(event.result)) {
-      ensurePageType(event.result);
     }
   },
 };

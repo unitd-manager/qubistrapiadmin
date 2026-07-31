@@ -10,23 +10,49 @@
     "metaDescription": {
       "type": "text"
     },
-    "canonicalUrl": {
+    "focusKeyword": {
       "type": "string"
     },
     "keywords": {
       "type": "string"
     },
-    "seoScore": {
+    "canonicalURL": {
       "type": "string"
     },
-    "contentAiScore": {
+    "metaImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "ogTitle": {
       "type": "string"
+    },
+    "ogDescription": {
+      "type": "text"
     },
     "ogImage": {
-      "type": "media"
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "twitterCard": {
+      "type": "enumeration",
+      "enum": ["summary", "summary_large_image"],
+      "default": "summary_large_image"
+    },
+    "schema": {
+      "type": "json"
+    },
+    "seoScore": {
+      "type": "integer",
+      "default": 0
+    },
+    "seoAnalysis": {
+      "type": "json"
     },
     "noIndex": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     }
   }
 }
