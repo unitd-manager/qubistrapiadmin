@@ -22,7 +22,7 @@ type ScoredDocument = {
 };
 
 // Content types this panel shows up on.
-const SUPPORTED_MODELS = ['api::page.page', 'api::blog.blog'];
+const SUPPORTED_MODELS = ['api::page.page', 'api::blog.blog', 'api::resource-page.resource-page'];
 
 const SeoScorePanel: PanelComponent = ({ model, document }: PanelComponentProps) => {
   if (!SUPPORTED_MODELS.includes(model)) {
