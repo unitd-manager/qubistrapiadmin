@@ -25,9 +25,10 @@ const config: Core.Config.Middlewares = [
   },
   'strapi::favicon',
   'strapi::public',
-  {
-    name: 'global::optimize-page-admin-list',
-  },
+  // Temporarily disable custom page admin optimization until the issue is fixed.
+  // {
+  //   name: 'global::optimize-page-admin-list',
+  // },
   {
     name: 'global::qbo-posts-router',
   },

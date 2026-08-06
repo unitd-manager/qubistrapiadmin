@@ -440,38 +440,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
-  collectionName: 'authors';
-  info: {
-    displayName: 'Author';
-    pluralName: 'authors';
-    singularName: 'author';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    avatar: Schema.Attribute.Media;
-    bio: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    designation: Schema.Attribute.String;
-    email: Schema.Attribute.Email;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::author.author'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiBlogCategoryBlogCategory
   extends Struct.CollectionTypeSchema {
   collectionName: 'blog_categories';
@@ -552,107 +520,6 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
-  collectionName: 'case_studies';
-  info: {
-    displayName: 'Case Study';
-    pluralName: 'case-studies';
-    singularName: 'case-study';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    challenge: Schema.Attribute.RichText;
-    client: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    featuredImage: Schema.Attribute.Media;
-    industry: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::case-study.case-study'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    results: Schema.Attribute.RichText;
-    seo: Schema.Attribute.Component<'shared.seo', false>;
-    slug: Schema.Attribute.UID<'title'>;
-    solution: Schema.Attribute.RichText;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
-  collectionName: 'categories';
-  info: {
-    displayName: 'Category';
-    pluralName: 'categories';
-    singularName: 'category';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::category.category'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    posts: Schema.Attribute.Relation<'manyToMany', 'api::post.post'>;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'name'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiCommentComment extends Struct.CollectionTypeSchema {
-  collectionName: 'comments';
-  info: {
-    displayName: 'Comment';
-    pluralName: 'comments';
-    singularName: 'comment';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    approved: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    author: Schema.Attribute.String & Schema.Attribute.Required;
-    content: Schema.Attribute.RichText & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::comment.comment'
-    > &
-      Schema.Attribute.Private;
-    parent: Schema.Attribute.Relation<'manyToOne', 'api::comment.comment'>;
-    post: Schema.Attribute.Relation<'manyToOne', 'api::post.post'>;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    url: Schema.Attribute.String;
-    wpCommentId: Schema.Attribute.Integer;
-  };
-}
-
 export interface ApiEnquiryEnquiry extends Struct.CollectionTypeSchema {
   collectionName: 'enquiries';
   info: {
@@ -701,32 +568,6 @@ export interface ApiEnquiryEnquiry extends Struct.CollectionTypeSchema {
     status: Schema.Attribute.Enumeration<['new', 'in_progress', 'closed']> &
       Schema.Attribute.DefaultTo<'new'>;
     subject: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
-  collectionName: 'faqs';
-  info: {
-    displayName: 'Faq';
-    pluralName: 'faqs';
-    singularName: 'faq';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    answer: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    question: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -796,103 +637,6 @@ export interface ApiHeaderHeader extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiLeadLead extends Struct.CollectionTypeSchema {
-  collectionName: 'leads';
-  info: {
-    displayName: 'Lead';
-    pluralName: 'leads';
-    singularName: 'lead';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::lead.lead'> &
-      Schema.Attribute.Private;
-    message: Schema.Attribute.RichText;
-    name: Schema.Attribute.String;
-    phone: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiMenuItemMenuItem extends Struct.CollectionTypeSchema {
-  collectionName: 'menu_items';
-  info: {
-    description: 'A link in the site header or footer. Top-level header items with children render as dropdowns. Fully client-managed.';
-    displayName: 'Menu Item';
-    pluralName: 'menu-items';
-    singularName: 'menu-item';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    children: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::menu-item.menu-item'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    label: Schema.Attribute.String & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::menu-item.menu-item'
-    > &
-      Schema.Attribute.Private;
-    location: Schema.Attribute.Enumeration<['header', 'footer']> &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'header'>;
-    open_in_new_tab: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<false>;
-    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    parent: Schema.Attribute.Relation<'manyToOne', 'api::menu-item.menu-item'>;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    url: Schema.Attribute.String;
-  };
-}
-
-export interface ApiMenuMenu extends Struct.CollectionTypeSchema {
-  collectionName: 'menus';
-  info: {
-    displayName: 'Menu';
-    pluralName: 'menus';
-    singularName: 'menu';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    items: Schema.Attribute.Component<'navigation.menu-node', true>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::menu.menu'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    wpTermId: Schema.Attribute.Integer;
-  };
-}
-
 export interface ApiNotFoundLogNotFoundLog extends Struct.CollectionTypeSchema {
   collectionName: 'not_found_logs';
   info: {
@@ -951,95 +695,6 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     navOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     pageBuilder: Schema.Attribute.DynamicZone<
       [
-        'acf-sections.banner-layout',
-        'acf-sections.home-key-highlights',
-        'acf-sections.home-automation-edge',
-        'acf-sections.home-industry-automation-solutions',
-        'acf-sections.home-featured-case-study',
-        'acf-sections.home-testimonial-highlight',
-        'acf-sections.home-client-logo',
-        'acf-sections.home-awards-and-certificates',
-        'acf-sections.home-award-winner',
-        'acf-sections.home-partner',
-        'acf-sections.home-blog-post',
-        'acf-sections.footer',
-        'acf-sections.common-cta',
-        'acf-sections.footer-common-cta',
-        'acf-sections.text-image-cta-section',
-        'acf-sections.grid-layout',
-        'acf-sections.content-highlight-block',
-        'acf-sections.info-cta-box',
-        'acf-sections.faq-section-block',
-        'acf-sections.side-image-info-blocks',
-        'acf-sections.common-heading-section',
-        'acf-sections.general-cta-section',
-        'acf-sections.two-column-text-cta',
-        'acf-sections.common-slider',
-        'acf-sections.spacing',
-        'acf-sections.section-space-padding',
-        'acf-sections.unmapped-layout',
-        'acf-sections.blog-layout',
-        'acf-sections.latest-post',
-        'acf-sections.latest-webinars',
-        'acf-sections.featured-webinars-media',
-        'acf-sections.common-posts-slider',
-        'acf-sections.classic-post-slider',
-        'acf-sections.resource-grid-layout',
-        'acf-sections.use-cases-grid',
-        'acf-sections.use-case-single',
-        'acf-sections.white-paper-single',
-        'acf-sections.usecase-industry-filter',
-        'acf-sections.usecase-highlight-block',
-        'acf-sections.content-layout',
-        'acf-sections.section-heading-with-columns',
-        'acf-sections.content-image-split-block',
-        'acf-sections.feature-highlight-block',
-        'acf-sections.timeline-sections',
-        'acf-sections.session-item-sections',
-        'acf-sections.roundtable-sessions-sections',
-        'acf-sections.service-overview',
-        'acf-sections.solutions-key-benefits',
-        'acf-sections.industry-highlight-block',
-        'acf-sections.text-image-split-block',
-        'acf-sections.image-with-keypoints',
-        'acf-sections.image-form-section',
-        'acf-sections.ai-tech-overview',
-        'acf-sections.text-table-block',
-        'acf-sections.industry-ai-use-cases',
-        'acf-sections.benefits-grid-layout',
-        'acf-sections.step-cards-section',
-        'acf-sections.solution-hero-banner-with-cta',
-        'acf-sections.solutions-feature-block',
-        'acf-sections.healthcare-automation-solutions',
-        'acf-sections.collaborations-section',
-        'acf-sections.partner-highlight-section',
-        'acf-sections.healthcare-automation-tabs',
-        'acf-sections.automation-cta-block',
-        'acf-sections.package-card-section',
-        'acf-sections.kognitos-benefits-section',
-        'acf-sections.why-kognitos-section',
-        'acf-sections.how-it-works-section',
-        'acf-sections.our-capabilities-section',
-        'acf-sections.about-banner-layout',
-        'acf-sections.about-awards-section',
-        'acf-sections.about-partner-section',
-        'acf-sections.about-client-logo-section',
-        'acf-sections.about-team-section',
-        'acf-sections.about-company-ethos-section',
-        'acf-sections.about-grid-layout',
-        'acf-sections.about-diversity-section',
-        'acf-sections.about-training-section',
-        'acf-sections.about-strategic-highlights-section',
-        'acf-sections.about-latest-updates-section',
-        'acf-sections.about-location-section',
-        'acf-sections.team-highlight-block',
-        'acf-sections.hiring-process-steps-layout',
-        'acf-sections.career-openings-section',
-        'acf-sections.form-with-contact-info',
-        'acf-sections.contact-location-section',
-        'acf-sections.image-text-feature-boxes',
-        'acf-sections.impact-highlights-section',
-        'acf-sections.partner-showcase-block',
         'acf-sections.qubi-home-hero',
         'acf-sections.qubi-demo-preview',
         'acf-sections.qubi-problem-section',
@@ -1055,7 +710,6 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'acf-sections.qubi-stats-section',
         'acf-sections.qubi-case-studies-section',
         'acf-sections.qubi-story-section',
-        'acf-sections.qubi-differentiators-section',
         'acf-sections.qubi-callout-section',
         'acf-sections.qubi-plans-section',
         'acf-sections.qubi-icon-grid-section',
@@ -1073,6 +727,13 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'acf-sections.solutions-comparison-block',
         'acf-sections.solutions-problems-block',
         'acf-sections.solutions-what-we-do',
+        'acf-sections.demo-sections-hero',
+        'acf-sections.demo-sections-video-showcase',
+        'acf-sections.demo-sections-capability-card',
+        'acf-sections.demo-sections-contact-cta',
+        'acf-sections.faq-hero',
+        'acf-sections.faq-list',
+        'acf-sections.faq-cta',
       ]
     >;
     pageType: Schema.Attribute.Enumeration<
@@ -1102,44 +763,6 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-  };
-}
-
-export interface ApiPostPost extends Struct.CollectionTypeSchema {
-  collectionName: 'posts';
-  info: {
-    displayName: 'Post';
-    pluralName: 'posts';
-    singularName: 'post';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    acf: Schema.Attribute.JSON;
-    categories: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::category.category'
-    >;
-    content: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    displayWpData: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    excerpt: Schema.Attribute.RichText;
-    featuredImage: Schema.Attribute.Media;
-    layout: Schema.Attribute.Text;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::post.post'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    seo: Schema.Attribute.Component<'shared.seo', false>;
-    slug: Schema.Attribute.UID<'title'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    wpPostIds: Schema.Attribute.String;
   };
 }
 
@@ -1208,34 +831,55 @@ export interface ApiResourcePageResourcePage
       [
         'sections.hero',
         'sections.cta',
-        'acf-sections.banner-layout',
-        'acf-sections.blog-layout',
-        'acf-sections.common-cta',
-        'acf-sections.footer-common-cta',
-        'acf-sections.latest-post',
-        'acf-sections.latest-webinars',
-        'acf-sections.featured-webinars-media',
-        'acf-sections.common-posts-slider',
-        'acf-sections.classic-post-slider',
-        'acf-sections.resource-grid-layout',
-        'acf-sections.use-cases-grid',
-        'acf-sections.use-case-single',
-        'acf-sections.white-paper-single',
-        'acf-sections.usecase-industry-filter',
-        'acf-sections.usecase-highlight-block',
-        'acf-sections.timeline-sections',
-        'acf-sections.session-item-sections',
-        'acf-sections.roundtable-sessions-sections',
-        'acf-sections.spacing',
-        'acf-sections.section-space-padding',
-        'acf-sections.unmapped-layout',
-        'acf-sections.demo-sections-hero',
-        'acf-sections.demo-sections-video-showcase',
+        'sections.faq-section',
+        'sections.gallery',
+        'sections.testimonial-section',
         'acf-sections.demo-sections-capability-card',
         'acf-sections.demo-sections-contact-cta',
-        'acf-sections.faq-hero',
-        'acf-sections.faq-list',
+        'acf-sections.demo-sections-hero',
+        'acf-sections.demo-sections-video-showcase',
         'acf-sections.faq-cta',
+        'acf-sections.faq-group',
+        'acf-sections.faq-hero',
+        'acf-sections.faq-item',
+        'acf-sections.faq-list',
+        'acf-sections.footer',
+        'acf-sections.hero',
+        'acf-sections.qubi-analytics-section',
+        'acf-sections.qubi-blog-list-section',
+        'acf-sections.qubi-callout-section',
+        'acf-sections.qubi-capabilities-section',
+        'acf-sections.qubi-case-studies-section',
+        'acf-sections.qubi-comparison-section',
+        'acf-sections.qubi-demo-preview',
+        'acf-sections.qubi-execution-section',
+        'acf-sections.qubi-faq-section',
+        'acf-sections.qubi-final-cta-section',
+        'acf-sections.qubi-home-hero',
+        'acf-sections.qubi-how-it-works-section',
+        'acf-sections.qubi-human-in-loop-section',
+        'acf-sections.qubi-icon-grid-section',
+        'acf-sections.qubi-integration-section',
+        'acf-sections.qubi-outcomes-section',
+        'acf-sections.qubi-plans-section',
+        'acf-sections.qubi-problem-section',
+        'acf-sections.qubi-simple-hero',
+        'acf-sections.qubi-stats-section',
+        'acf-sections.qubi-story-section',
+        'acf-sections.qubi-subscribe-cta-section',
+        'acf-sections.qubi-use-cases-section',
+        'acf-sections.roundtable-sessions-sections',
+        'acf-sections.section-space-padding',
+        'acf-sections.session-item-sections',
+        'acf-sections.solutions-comparison-block',
+        'acf-sections.solutions-execution-flow',
+        'acf-sections.solutions-final-cta',
+        'acf-sections.solutions-hero-banner',
+        'acf-sections.solutions-industry-layout',
+        'acf-sections.solutions-problems-block',
+        'acf-sections.solutions-stats-band',
+        'acf-sections.solutions-use-cases-layout',
+        'acf-sections.solutions-what-we-do',
       ]
     >;
     pageType: Schema.Attribute.Enumeration<
@@ -1246,168 +890,6 @@ export interface ApiResourcePageResourcePage
     seo: Schema.Attribute.Component<'shared.seo', false>;
     showInNav: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     slug: Schema.Attribute.UID<'title'>;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiServiceService extends Struct.CollectionTypeSchema {
-  collectionName: 'services';
-  info: {
-    displayName: 'Service';
-    pluralName: 'services';
-    singularName: 'service';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    banner: Schema.Attribute.Media;
-    content: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    icon: Schema.Attribute.Media;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::service.service'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    seo: Schema.Attribute.Component<'shared.seo', false>;
-    shortDescription: Schema.Attribute.Text;
-    slug: Schema.Attribute.UID<'title'>;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiSiteSettingSiteSetting extends Struct.SingleTypeSchema {
-  collectionName: 'site_settings';
-  info: {
-    description: 'Global site values: the header call-to-action button.';
-    displayName: 'Site Setting';
-    pluralName: 'site-settings';
-    singularName: 'site-setting';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    cta_label: Schema.Attribute.String;
-    cta_url: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::site-setting.site-setting'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiTagTag extends Struct.CollectionTypeSchema {
-  collectionName: 'tags';
-  info: {
-    displayName: 'Tag';
-    pluralName: 'tags';
-    singularName: 'tag';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'> &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'name'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiTestimonialTestimonial extends Struct.CollectionTypeSchema {
-  collectionName: 'testimonials';
-  info: {
-    displayName: 'Testimonial';
-    pluralName: 'testimonials';
-    singularName: 'testimonial';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    company: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    designation: Schema.Attribute.String;
-    image: Schema.Attribute.Media;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::testimonial.testimonial'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    testimonial: Schema.Attribute.RichText;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiWordpressPostWordpressPost
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'wordpress_posts';
-  info: {
-    description: '';
-    displayName: 'WordPress Posts';
-    pluralName: 'wordpress-posts';
-    singularName: 'wordpress-post';
-  };
-  options: {
-    draftAndPublish: false;
-    increments: true;
-    timestamps: true;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::wordpress-post.wordpress-post'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1926,29 +1408,15 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::author.author': ApiAuthorAuthor;
       'api::blog-category.blog-category': ApiBlogCategoryBlogCategory;
       'api::blog.blog': ApiBlogBlog;
-      'api::case-study.case-study': ApiCaseStudyCaseStudy;
-      'api::category.category': ApiCategoryCategory;
-      'api::comment.comment': ApiCommentComment;
       'api::enquiry.enquiry': ApiEnquiryEnquiry;
-      'api::faq.faq': ApiFaqFaq;
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;
-      'api::lead.lead': ApiLeadLead;
-      'api::menu-item.menu-item': ApiMenuItemMenuItem;
-      'api::menu.menu': ApiMenuMenu;
       'api::not-found-log.not-found-log': ApiNotFoundLogNotFoundLog;
       'api::page.page': ApiPagePage;
-      'api::post.post': ApiPostPost;
       'api::redirect.redirect': ApiRedirectRedirect;
       'api::resource-page.resource-page': ApiResourcePageResourcePage;
-      'api::service.service': ApiServiceService;
-      'api::site-setting.site-setting': ApiSiteSettingSiteSetting;
-      'api::tag.tag': ApiTagTag;
-      'api::testimonial.testimonial': ApiTestimonialTestimonial;
-      'api::wordpress-post.wordpress-post': ApiWordpressPostWordpressPost;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -4,14 +4,6 @@
     "displayName": "Section Space (Padding)"
   },
   "attributes": {
-    "padding_options": {
-      "type": "boolean"
-    },
-    "padding_position": {
-      "type": "component",
-      "repeatable": false,
-      "component": "acf-shared.section-space-padding-position"
-    },
     "desktop_padding": {
       "type": "component",
       "repeatable": false,
@@ -21,6 +13,11 @@
       "type": "component",
       "repeatable": false,
       "component": "acf-shared.section-space-padding-mobile-padding"
+    },
+    "position": {
+      "type": "component",
+      "repeatable": false,
+      "component": "acf-shared.section-space-padding-position"
     }
   }
 }

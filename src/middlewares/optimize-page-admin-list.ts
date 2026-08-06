@@ -118,34 +118,50 @@ const setCachedComponentTypes = (documentId: string, value: string[]) => {
 };
 
 const getPageBuilderComponentTypes = async (strapi: Core.Strapi, documentId: string) => {
-  const cached = getCachedComponentTypes(documentId);
-  if (cached) {
-    return cached;
-  }
+  try {
+    const cached = getCachedComponentTypes(documentId);
+    if (cached) {
+      return cached;
+    }
 
-  const pageRow = await strapi.db
-    .connection('pages')
-    .select('id')
-    .where('document_id', documentId)
-    .first();
+    const pageRow = await strapi.db
+      .connection('pages')
+      .select('id')
+      .where('document_id', documentId)
+      .first();
 
-  const pageId = Number(pageRow?.id);
-  if (!Number.isFinite(pageId) || pageId <= 0) {
-    setCachedComponentTypes(documentId, []);
+    const pageId = Number(pageRow?.id);
+    if (!Number.isFinite(pageId) || pageId <= 0) {
+      setCachedComponentTypes(documentId, []);
+      return [];
+    }
+
+    const rows = await strapi.db
+      .connection('pages_cmps')
+      .distinct('component_type')
+      .where({ entity_id: pageId, field: 'pageBuilder' });
+
+    const contentType = strapi.contentType('api::page.page');
+    const pageBuilderComponentsCandidate =
+      Array.isArray(contentType?.attributes?.pageBuilder?.components)
+        ? (contentType?.attributes?.pageBuilder?.components as string[])
+        : [];
+    const pageBuilderComponents = Array.isArray(pageBuilderComponentsCandidate)
+      ? pageBuilderComponentsCandidate
+      : [];
+    const pageBuilderTypes = new Set(pageBuilderComponents);
+
+    const componentTypes = (rows || [])
+      .map((row) => row?.component_type)
+      .filter((value): value is string => typeof value === 'string' && value.length > 0)
+      .filter((componentType) => pageBuilderTypes.has(componentType));
+
+    setCachedComponentTypes(documentId, componentTypes);
+    return componentTypes;
+  } catch (error) {
+    strapi.log.error('[page-admin] getPageBuilderComponentTypes error', error);
     return [];
   }
-
-  const rows = await strapi.db
-    .connection('pages_cmps')
-    .distinct('component_type')
-    .where({ entity_id: pageId, field: 'pageBuilder' });
-
-  const componentTypes = (rows || [])
-    .map((row) => row?.component_type)
-    .filter((value): value is string => typeof value === 'string' && value.length > 0);
-
-  setCachedComponentTypes(documentId, componentTypes);
-  return componentTypes;
 };
 
 const buildPopulateForUsedPageBuilderTypes = (componentTypes: string[]) => {
@@ -186,162 +202,174 @@ const optimizePageDocumentPopulate = async (
   query: Record<string, any>,
   useLeanDocumentPopulate: boolean
 ) => {
-  if (useLeanDocumentPopulate) {
-    query.populate = buildLeanPageDocumentPopulate();
-    return;
-  }
+  try {
+    if (useLeanDocumentPopulate) {
+      query.populate = buildLeanPageDocumentPopulate();
+      return;
+    }
 
-  const documentId = getDocumentIdFromPath(requestPath);
-  if (!documentId) {
-    return;
-  }
+    const documentId = getDocumentIdFromPath(requestPath);
+    if (!documentId) {
+      return;
+    }
 
-  const componentTypes = await getPageBuilderComponentTypes(strapi, documentId);
-  query.populate = buildPopulateForUsedPageBuilderTypes(componentTypes);
+    const componentTypes = await getPageBuilderComponentTypes(strapi, documentId);
+    query.populate = buildPopulateForUsedPageBuilderTypes(componentTypes);
+  } catch (error) {
+    strapi.log.error('[page-admin] optimizePageDocumentPopulate error', error);
+    query.populate = {};
+  }
 };
 
 export default (_config: unknown, { strapi }: { strapi: Core.Strapi }) => {
   const useLeanDocumentPopulate = false;
 
   return async (ctx: any, next: () => Promise<void>) => {
-    const requestPath = ctx?.request?.path;
-    const method = ctx?.request?.method;
-    const isListPath = typeof requestPath === 'string' && ADMIN_PAGES_LIST_PATH_REGEX.test(requestPath);
-    const isDocumentPath = typeof requestPath === 'string' && ADMIN_PAGES_DOCUMENT_PATH_REGEX.test(requestPath);
-    const isCountPath = requestPath === ADMIN_PAGES_COUNT_PATH;
-    const isCountDraftRelationsPath = requestPath === ADMIN_PAGES_COUNT_DRAFT_RELATIONS_PATH;
-    const isPagesCollectionPath =
-      isListPath ||
-      isCountPath ||
-      isCountDraftRelationsPath;
+    try {
+      const requestPath = ctx?.request?.path;
+      const method = ctx?.request?.method;
+      const isListPath = typeof requestPath === 'string' && ADMIN_PAGES_LIST_PATH_REGEX.test(requestPath);
+      const isDocumentPath = typeof requestPath === 'string' && ADMIN_PAGES_DOCUMENT_PATH_REGEX.test(requestPath);
+      const isCountPath = requestPath === ADMIN_PAGES_COUNT_PATH;
+      const isCountDraftRelationsPath = requestPath === ADMIN_PAGES_COUNT_DRAFT_RELATIONS_PATH;
+      const isPagesCollectionPath =
+        isListPath ||
+        isCountPath ||
+        isCountDraftRelationsPath;
 
-    if (isDocumentPath && (method === 'GET' || method === 'PUT')) {
+      if (isDocumentPath && (method === 'GET' || method === 'PUT')) {
+        const query = (ctx.query ?? {}) as Record<string, any>;
+        const startedAt = Date.now();
+
+        await optimizePageDocumentPopulate(strapi, requestPath, query, useLeanDocumentPopulate);
+
+        // Keep document endpoint scoped to the published locale variant by default.
+        if (!query.status) {
+          query.status = 'published';
+        }
+
+        ctx.query = query;
+        await next();
+
+        // Page was updated, invalidate cached component type mapping for this document.
+        if (method === 'PUT') {
+          const documentId = getDocumentIdFromPath(requestPath);
+          if (documentId) {
+            pageComponentTypeCache.delete(documentId);
+          }
+        }
+
+        const durationMs = Date.now() - startedAt;
+        if (durationMs >= 1000 || ctx.status >= 400) {
+          strapi.log.info(
+            `[page-admin-document] status=${ctx.status} duration=${durationMs}ms method=${method} leanPopulate=${useLeanDocumentPopulate} deepComponentPopulate=${readBooleanEnv('STRAPI_ADMIN_PAGE_DEEP_COMPONENT_POPULATE', DEFAULT_DEEP_COMPONENT_POPULATE)}`
+          );
+        }
+
+        return;
+      }
+
+      if (!isPagesCollectionPath || method !== 'GET') {
+        await next();
+        return;
+      }
+
       const query = (ctx.query ?? {}) as Record<string, any>;
-      const startedAt = Date.now();
+      
+      if (isListPath) {
+        const startedAt = Date.now();
 
-      await optimizePageDocumentPopulate(strapi, requestPath, query, useLeanDocumentPopulate);
+        const pagination = { ...(query.pagination ?? {}) };
+        const page = parsePage(pagination.page ?? query.page);
+        const pageSize = clampPageSize(pagination.pageSize ?? query.pageSize);
+        const offset = (page - 1) * pageSize;
+        const { field: sortField, direction: sortDirection } = parseSort(query.sort);
+        const sortColumn = SORT_FIELD_MAP[sortField] ?? 'id';
 
-      // Keep document endpoint scoped to the published locale variant by default.
-      if (!query.status) {
-        query.status = 'published';
+        const baseQuery = strapi.db.connection('pages');
+        applyStatusFilter(baseQuery, query.status ?? 'published');
+
+        const rows = await baseQuery
+          .clone()
+          .select([
+            'id',
+            'document_id as documentId',
+            'title',
+            'slug',
+            'updated_at as updatedAt',
+            'published_at as publishedAt',
+            'created_at as createdAt',
+          ])
+          .orderBy(sortColumn, sortDirection)
+          .limit(pageSize)
+          .offset(offset);
+
+        const countRow = await baseQuery
+          .clone()
+          .count('id as count')
+          .first();
+
+        const total = Number(countRow?.count ?? 0);
+        const pageCount = Math.max(1, Math.ceil(total / pageSize));
+
+        ctx.status = 200;
+        ctx.body = {
+          results: rows,
+          pagination: {
+            page,
+            pageSize,
+            pageCount,
+            total,
+          },
+        };
+
+        const durationMs = Date.now() - startedAt;
+        strapi.log.info(
+          `[page-admin-list-fast] status=200 path=${requestPath} duration=${durationMs}ms page=${page} pageSize=${pageSize} sort=${sortField}:${sortDirection}`
+        );
+        return;
+      }
+
+      if (!Array.isArray(query.fields) || query.fields.length === 0) {
+        query.fields = [...LIST_FIELDS];
+      }
+
+      query.populate = {};
+      query.status = query.status ?? 'published';
+
+      const pagination = { ...(query.pagination ?? {}) };
+      pagination.page = parsePage(pagination.page ?? query.page);
+      pagination.pageSize = clampPageSize(pagination.pageSize ?? query.pageSize);
+      query.pagination = pagination;
+      query.page = pagination.page;
+      query.pageSize = pagination.pageSize;
+
+      if (!query.sort) {
+        query.sort = ['id:desc'];
       }
 
       ctx.query = query;
-      await next();
 
-      // Page was updated, invalidate cached component type mapping for this document.
-      if (method === 'PUT') {
-        const documentId = getDocumentIdFromPath(requestPath);
-        if (documentId) {
-          pageComponentTypeCache.delete(documentId);
-        }
-      }
+      const startedAt = Date.now();
+      await next();
 
       const durationMs = Date.now() - startedAt;
       if (durationMs >= 1000 || ctx.status >= 400) {
         strapi.log.info(
-          `[page-admin-document] status=${ctx.status} duration=${durationMs}ms method=${method} leanPopulate=${useLeanDocumentPopulate} deepComponentPopulate=${readBooleanEnv('STRAPI_ADMIN_PAGE_DEEP_COMPONENT_POPULATE', DEFAULT_DEEP_COMPONENT_POPULATE)}`
+          `[page-admin-list] status=${ctx.status} duration=${durationMs}ms page=${query.page} pageSize=${query.pageSize}`
         );
       }
-
+    } catch (error) {
+      strapi.log.error('[page-admin] middleware error', error);
+      // Don't call next() again here — return a 500 to avoid double-calling next()
+      try {
+        ctx.status = 500;
+        ctx.body = { error: 'Internal Server Error' };
+      } catch (e) {
+        // ignore
+      }
       return;
-    }
-
-    if (!isPagesCollectionPath || method !== 'GET') {
-      await next();
-      return;
-    }
-
-    const query = (ctx.query ?? {}) as Record<string, any>;
-
-    if (isListPath) {
-      const startedAt = Date.now();
-
-      const pagination = { ...(query.pagination ?? {}) };
-      const page = parsePage(pagination.page ?? query.page);
-      const pageSize = clampPageSize(pagination.pageSize ?? query.pageSize);
-      const offset = (page - 1) * pageSize;
-      const { field: sortField, direction: sortDirection } = parseSort(query.sort);
-      const sortColumn = SORT_FIELD_MAP[sortField] ?? 'id';
-
-      const baseQuery = strapi.db.connection('pages');
-      applyStatusFilter(baseQuery, query.status ?? 'published');
-
-      const rows = await baseQuery
-        .clone()
-        .select([
-          'id',
-          'document_id as documentId',
-          'title',
-          'slug',
-          'updated_at as updatedAt',
-          'published_at as publishedAt',
-          'created_at as createdAt',
-        ])
-        .orderBy(sortColumn, sortDirection)
-        .limit(pageSize)
-        .offset(offset);
-
-      const countRow = await baseQuery
-        .clone()
-        .count('id as count')
-        .first();
-
-      const total = Number(countRow?.count ?? 0);
-      const pageCount = Math.max(1, Math.ceil(total / pageSize));
-
-      ctx.status = 200;
-      ctx.body = {
-        results: rows,
-        pagination: {
-          page,
-          pageSize,
-          pageCount,
-          total,
-        },
-      };
-
-      const durationMs = Date.now() - startedAt;
-      strapi.log.info(
-        `[page-admin-list-fast] status=200 path=${requestPath} duration=${durationMs}ms page=${page} pageSize=${pageSize} sort=${sortField}:${sortDirection}`
-      );
-      return;
-    }
-
-    if (!Array.isArray(query.fields) || query.fields.length === 0) {
-      query.fields = [...LIST_FIELDS];
-    }
-
-    // Content-manager list does not need component trees for the left-table view.
-    // Force an empty populate to avoid expensive dynamic-zone joins.
-    query.populate = {};
-
-    // Keep drafts relation out of the response on list/count endpoints.
-    query.status = query.status ?? 'published';
-
-    const pagination = { ...(query.pagination ?? {}) };
-    pagination.page = parsePage(pagination.page ?? query.page);
-    pagination.pageSize = clampPageSize(pagination.pageSize ?? query.pageSize);
-    query.pagination = pagination;
-    query.page = pagination.page;
-    query.pageSize = pagination.pageSize;
-
-    if (!query.sort) {
-      // id is indexed by default; sorting by it avoids filesort on large tables.
-      query.sort = ['id:desc'];
-    }
-
-    ctx.query = query;
-
-    const startedAt = Date.now();
-    await next();
-
-    const durationMs = Date.now() - startedAt;
-
-    if (durationMs >= 1000 || ctx.status >= 400) {
-      strapi.log.info(
-        `[page-admin-list] status=${ctx.status} duration=${durationMs}ms page=${query.page} pageSize=${query.pageSize}`
-      );
     }
   };
 };
+
