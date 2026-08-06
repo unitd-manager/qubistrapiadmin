@@ -5,7 +5,12 @@
   },
   "attributes": {
     "title": {
-      "type": "text"
+      "type": "string"
+    }
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "mainField": "title"
     }
   }
 }

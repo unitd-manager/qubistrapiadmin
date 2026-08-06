@@ -6,6 +6,15 @@
   "attributes": {
     "text": {
       "type": "text"
+    },
+    "label": {
+      "type": "string",
+      "description": "Optional short label shown as the row preview in the admin panel — not shown on the live site, only helps identify paragraphs while editing."
+    }
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "mainField": "label"
     }
   }
 }

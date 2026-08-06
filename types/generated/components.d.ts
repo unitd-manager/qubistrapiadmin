@@ -1011,8 +1011,13 @@ export interface AcfSharedQubiHumanInLoopSectionBadges
   info: {
     displayName: 'Qubi Human In Loop Section Badges';
   };
+  pluginOptions: {
+    'content-manager': {
+      mainField: 'title';
+    };
+  };
   attributes: {
-    title: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -1100,7 +1105,13 @@ export interface AcfSharedQubiTextParagraph extends Struct.ComponentSchema {
   info: {
     displayName: 'Qubi Text Paragraph';
   };
+  pluginOptions: {
+    'content-manager': {
+      mainField: 'label';
+    };
+  };
   attributes: {
+    label: Schema.Attribute.String;
     text: Schema.Attribute.Text;
   };
 }
