@@ -9,6 +9,7 @@ const config: Core.Config.Middlewares = [
     config: {
       origin: [
         'http://localhost:8080',
+        'http://localhost:8083',
         'http://localhost:8098',
         'https://qubistrapidev.unitdtechnologies.com',
       ],
