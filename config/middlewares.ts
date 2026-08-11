@@ -9,6 +9,7 @@ const config: Core.Config.Middlewares = [
     name: 'strapi::cors',
     config: {
       origin: [
+        'http://localhost:8080',
         'http://localhost:8095',
         'https://qubistrapidev.unitdtechnologies.com',
       ],
@@ -38,8 +39,7 @@ const config: Core.Config.Middlewares = [
   'strapi::favicon',
   'strapi::public',
 
-  // Temporarily disabled custom page admin optimization
-  // until the issue is fixed.
+  // Temporarily disabled custom page admin optimization.
   //
   // {
   //   name: 'global::optimize-page-admin-list',
