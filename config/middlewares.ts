@@ -4,32 +4,47 @@ const config: Core.Config.Middlewares = [
   'strapi::logger',
   'strapi::errors',
   'strapi::security',
+
   {
     name: 'strapi::cors',
     config: {
       origin: [
-        'http://localhost:8080',
-        'http://localhost:8083',
-        'http://localhost:8098',
+        'http://localhost:8095',
         'https://qubistrapidev.unitdtechnologies.com',
       ],
-      headers: '*',
+
+      headers: [
+        'Content-Type',
+        'Authorization',
+        'Origin',
+        'Accept',
+      ],
+
       credentials: true,
+
+      keepHeaderOnError: true,
     },
   },
+
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
   'strapi::session',
+
   {
     name: 'global::normalize-media-urls',
   },
+
   'strapi::favicon',
   'strapi::public',
-  // Temporarily disable custom page admin optimization until the issue is fixed.
+
+  // Temporarily disabled custom page admin optimization
+  // until the issue is fixed.
+  //
   // {
   //   name: 'global::optimize-page-admin-list',
   // },
+
   {
     name: 'global::qbo-posts-router',
   },

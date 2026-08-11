@@ -29,7 +29,10 @@ export default factories.createCoreController('api::page.page', ({ strapi }) => 
     const entries = await strapi.documents('api::page.page').findMany({
       filters: { slug },
       status: 'published',
-      populate: { pageBuilder: { on: buildDynamicZonePopulate(PAGE_BUILDER_COMPONENTS) } },
+      populate: {
+        pageBuilder: { on: buildDynamicZonePopulate(PAGE_BUILDER_COMPONENTS) },
+        seo: { populate: { ogImage: true, metaImage: true } },
+      },
     });
 
     if (!entries || entries.length === 0) return ctx.notFound();
