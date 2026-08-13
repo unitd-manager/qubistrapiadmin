@@ -8,11 +8,37 @@ const config: Core.Config.Middlewares = [
   {
     name: 'strapi::cors',
     config: {
-      origin: [
-        'http://localhost:8080',
-        'http://localhost:8095',
-        'https://qubistrapidev.unitdtechnologies.com',
-      ],
+      origin: (ctx) => {
+        const requestOrigin = ctx.request.header.origin;
+
+        if (!requestOrigin) {
+          return '';
+        }
+
+        /**
+         * Allow ANY localhost / 127.0.0.1 port during local
+         * development (npm run dev, npm run preview, or any
+         * other local tool), so this never needs manual
+         * editing again when a port changes.
+         */
+        const isLocalhost =
+          /^https?:\/\/(localhost|127\.0\.0\.1):\d+$/.test(
+            requestOrigin
+          );
+
+        const allowedProdOrigins = [
+          'https://qubistrapidev.unitdtechnologies.com',
+        ];
+
+        if (
+          isLocalhost ||
+          allowedProdOrigins.includes(requestOrigin)
+        ) {
+          return requestOrigin;
+        }
+
+        return '';
+      },
 
       headers: [
         'Content-Type',
