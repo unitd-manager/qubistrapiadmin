@@ -27,7 +27,7 @@ const config: Core.Config.Middlewares = [
           );
 
         const allowedProdOrigins = [
-          'https://qubistrapidev.unitdtechnologies.com',
+          'https://qubidevstrapi.unitdtechnologies.com',
         ];
 
         if (

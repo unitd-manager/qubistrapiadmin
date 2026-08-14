@@ -12,7 +12,7 @@
  */
 "use strict";
 
-const LIVE_API = "https://qubiadmin.unitdtechnologies.com/api";
+const LIVE_API = "https://qubistrapiadmin.unitdtechnologies.com/api";
 const FORCE = process.argv.includes("--force");
 
 async function fetchLiveBlogs() {

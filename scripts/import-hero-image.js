@@ -19,7 +19,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 
-const LIVE_API = "https://qubiadmin.unitdtechnologies.com";
+const LIVE_API = "https://qubistrapiadmin.unitdtechnologies.com";
 const HERO_SECTION_URL = `${LIVE_API}/api/sections?populate=images&filters[section_type][$eq]=hero&filters[published][$eq]=true`;
 
 async function findLiveHeroImage() {
