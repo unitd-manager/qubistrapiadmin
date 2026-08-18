@@ -107,7 +107,8 @@
         "acf-sections.demo-sections-contact-cta",
         "acf-sections.faq-hero",
         "acf-sections.faq-list",
-        "acf-sections.faq-cta"
+        "acf-sections.faq-cta",
+        "acf-sections.qubi-differentiators-section"
       ]
     }
   }

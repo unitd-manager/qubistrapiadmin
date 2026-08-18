@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_acf_sections_qubi_differentiators_sections",
+  "info": {
+    "displayName": "Qubi Differentiators Section",
+    "description": "Four-column grid of check-marked cards used for \"Why enterprise clients choose us\""
+  },
+  "attributes": {
+    "section_space_padding": {
+      "type": "component",
+      "repeatable": false,
+      "component": "acf-sections.section-space-padding"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "main_title": {
+      "type": "text"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "acf-shared.qubi-differentiator-item"
+    },
+    "class_name": {
+      "type": "string"
+    },
+    "acf_id": {
+      "type": "string"
+    }
+  }
+}

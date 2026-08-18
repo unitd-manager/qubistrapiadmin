@@ -23,7 +23,7 @@ function createDynamicZone(components, options = {}) {
   return {
     type: 'dynamiczone',
     ...options,
-    components,
+    components: [...new Set(components)],
   };
 }
 
@@ -37,8 +37,18 @@ function createSectionAttributes() {
 }
 
 function buildPageSchema() {
+  const pageBuilderComponents = [
+    ...new Set([
+      ...PAGE_BUILDER_COMPONENTS,
+
+      // Explicitly preserve the Qubi Differentiators block.
+      'acf-sections.qubi-differentiators-section',
+    ]),
+  ];
+
   return {
     kind: 'collectionType',
+
     collectionName: 'pages',
 
     info: {
@@ -96,7 +106,7 @@ function buildPageSchema() {
       ...createSectionAttributes(),
 
       pageBuilder: createDynamicZone(
-        PAGE_BUILDER_COMPONENTS,
+        pageBuilderComponents,
         {
           configurable: false,
         }
@@ -114,16 +124,37 @@ function writeSchema() {
 
   fs.writeFileSync(
     pageSchemaPath,
-    JSON.stringify(schema, null, 2),
+    `${JSON.stringify(schema, null, 2)}\n`,
     'utf8'
   );
 
+  const components =
+    schema.attributes.pageBuilder.components;
+
+  const differentiatorExists = components.includes(
+    'acf-sections.qubi-differentiators-section'
+  );
+
   console.log(
-    `✅ Generated ${path.relative(
+    `Generated ${path.relative(
       process.cwd(),
       pageSchemaPath
     )}`
   );
+
+  console.log(
+    `Page Builder components: ${components.length}`
+  );
+
+  console.log(
+    `Qubi Differentiator registered: ${differentiatorExists}`
+  );
+
+  if (!differentiatorExists) {
+    throw new Error(
+      'Qubi Differentiator was not registered in pageBuilder.'
+    );
+  }
 }
 
 writeSchema();

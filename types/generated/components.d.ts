@@ -296,6 +296,29 @@ export interface AcfSectionsQubiDemoPreview extends Struct.ComponentSchema {
   };
 }
 
+export interface AcfSectionsQubiDifferentiatorsSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_sections_qubi_differentiators_sections';
+  info: {
+    description: 'Four-column grid of check-marked cards used for "Why enterprise clients choose us"';
+    displayName: 'Qubi Differentiators Section';
+  };
+  attributes: {
+    acf_id: Schema.Attribute.String;
+    class_name: Schema.Attribute.String;
+    eyebrow: Schema.Attribute.String;
+    items: Schema.Attribute.Component<
+      'acf-shared.qubi-differentiator-item',
+      true
+    >;
+    main_title: Schema.Attribute.Text;
+    section_space_padding: Schema.Attribute.Component<
+      'acf-sections.section-space-padding',
+      false
+    >;
+  };
+}
+
 export interface AcfSectionsQubiExecutionSection
   extends Struct.ComponentSchema {
   collectionName: 'components_acf_sections_qubi_execution_sections';
@@ -980,6 +1003,19 @@ export interface AcfSharedQubiComparisonRow extends Struct.ComponentSchema {
   };
 }
 
+export interface AcfSharedQubiDifferentiatorItem
+  extends Struct.ComponentSchema {
+  collectionName: 'components_acf_shared_qubi_differentiator_items';
+  info: {
+    description: 'Single check-marked card item used inside the differentiators ("Why enterprise clients choose us") section';
+    displayName: 'Qubi Differentiator Item';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface AcfSharedQubiFaqItem extends Struct.ComponentSchema {
   collectionName: 'components_acf_shared_qubi_faq_items';
   info: {
@@ -1531,6 +1567,7 @@ declare module '@strapi/strapi' {
       'acf-sections.qubi-case-studies-section': AcfSectionsQubiCaseStudiesSection;
       'acf-sections.qubi-comparison-section': AcfSectionsQubiComparisonSection;
       'acf-sections.qubi-demo-preview': AcfSectionsQubiDemoPreview;
+      'acf-sections.qubi-differentiators-section': AcfSectionsQubiDifferentiatorsSection;
       'acf-sections.qubi-execution-section': AcfSectionsQubiExecutionSection;
       'acf-sections.qubi-faq-section': AcfSectionsQubiFaqSection;
       'acf-sections.qubi-final-cta-section': AcfSectionsQubiFinalCtaSection;
@@ -1567,6 +1604,7 @@ declare module '@strapi/strapi' {
       'acf-shared.qubi-case-metric': AcfSharedQubiCaseMetric;
       'acf-shared.qubi-case-study': AcfSharedQubiCaseStudy;
       'acf-shared.qubi-comparison-row': AcfSharedQubiComparisonRow;
+      'acf-shared.qubi-differentiator-item': AcfSharedQubiDifferentiatorItem;
       'acf-shared.qubi-faq-item': AcfSharedQubiFaqItem;
       'acf-shared.qubi-how-it-works-section-steps': AcfSharedQubiHowItWorksSectionSteps;
       'acf-shared.qubi-human-in-loop-section-badges': AcfSharedQubiHumanInLoopSectionBadges;

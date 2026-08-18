@@ -734,6 +734,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'acf-sections.faq-hero',
         'acf-sections.faq-list',
         'acf-sections.faq-cta',
+        'acf-sections.qubi-differentiators-section',
       ]
     >;
     pageType: Schema.Attribute.Enumeration<
