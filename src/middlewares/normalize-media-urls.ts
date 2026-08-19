@@ -58,21 +58,30 @@ export default (_config: unknown, { strapi }: { strapi: Core.Strapi }) => {
   const configuredBaseUrl = normalizeBaseUrl(
     process.env.PUBLIC_URL || process.env.STRAPI_PUBLIC_URL || process.env.STRAPI_URL
   );
-
   return async (ctx: any, next: () => Promise<void>) => {
     await next();
 
-    if (!ctx.body || typeof ctx.body !== 'object') {
+    // Skip non-plain-object bodies (Buffers, Streams, strings, etc.)
+    if (
+      !ctx.body ||
+      typeof ctx.body !== 'object' ||
+      Buffer.isBuffer(ctx.body) ||
+      typeof ctx.body.pipe === 'function' // streams
+    ) {
       return;
     }
 
     const requestBaseUrl = normalizeBaseUrl(`${ctx.protocol}://${ctx.host}`);
     const baseUrl = configuredBaseUrl || requestBaseUrl;
-
     if (!baseUrl) {
       return;
     }
 
-    rewriteMediaUrls(ctx.body, baseUrl, new WeakSet<object>());
+    try {
+      rewriteMediaUrls(ctx.body, baseUrl, new WeakSet<object>());
+    } catch (err) {
+      strapi.log.error('normalize-media-urls failed to rewrite response body:', err);
+      // don't rethrow — leave ctx.body as-is rather than corrupting the response
+    }
   };
 };
